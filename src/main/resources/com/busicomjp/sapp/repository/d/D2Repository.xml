@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.d.D2Repository">
+	<resultMap id="TorihikisakiResult" type="com.busicomjp.sapp.model.d.TorihikisakiData">
+    </resultMap>
+	<resultMap id="TorihikisakiJyufukuResult" type="com.busicomjp.sapp.model.d.TorihikisakiData">
+    </resultMap>
+    <resultMap id="ComboItemSupplierResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+    <resultMap id="ComboItemCustomerResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+    <resultMap id="ComboItemUnpaidResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+
+	<select id="selectToriHikiName" resultMap="TorihikisakiResult" parameterType="String">
+		SELECT
+			a.company_code companyCode,
+			a.torihikisaki_code torihikisakiCode,
+		    a.torihikisaki_name torihikisakiName,
+		    a.torihikisaki_name_kana torihikisakiNameKana,
+		    a.torihikisaki_type torihikisakiType,
+		    a.account_code accountCode,
+		    a.del_flg delFlg,
+		    b.account_kind1 accountKind1,
+		    b.account_kind2 accountKind2,
+		    b.account_kind3 accountKind3,
+		    b.account_kind4 accountKind4
+		FROM TORIHIKISAKI_M a left join ACCOUNT_M b
+				  on a.company_code = b.company_code and a.account_code = b.account_code
+		WHERE a.company_code = #{companyCode}
+		      and a.del_flg = '0'
+				  <if test="searchName != null">
+				  	and a.torihikisaki_name LIKE CONCAT('%', #{searchName}, '%')
+				  </if>
+				  <if test="searchTorihikisaki_name_kana != null">
+				  	and a.torihikisaki_name_kana LIKE CONCAT('%', #{searchTorihikisaki_name_kana}, '%')
+				  </if>
+		ORDER BY a.company_code, a.torihikisaki_code, a.torihikisaki_type
+	</select>
+	
+	<select id="selectSupplierList" resultMap="ComboItemSupplierResult" parameterType="String">
+		SELECT
+		   account_code accountCode,
+		   account_name accountName
+		FROM ACCOUNT_M 
+		WHERE company_code = #{companyCode}
+			  AND account_kind1 = '2'
+			  AND account_kind2 = '01'
+			  AND account_kind3 = '001'
+			  AND account_kind4 = '0002'
+			  AND del_flg = '0'
+	    ORDER BY account_code
+	</select>
+	
+	<select id="selectCustomerList" resultMap="ComboItemCustomerResult" parameterType="String">
+		SELECT
+		   account_code accountCode,
+		   account_name accountName
+		FROM ACCOUNT_M 
+		WHERE company_code = #{companyCode}
+			  AND account_kind1 = '1'
+			  AND account_kind2 = '01'
+			  AND account_kind3 = '003'
+			  AND account_kind4 = '0002'
+			  AND del_flg = '0'
+	    ORDER BY account_code
+	</select>
+	
+	<select id="selectUnpaidList" resultMap="ComboItemUnpaidResult" parameterType="String">
+		SELECT
+		   account_code accountCode,
+		   account_name accountName
+		FROM ACCOUNT_M 
+		WHERE company_code = #{companyCode}
+			  AND account_kind1 = '2'
+			  AND account_kind2 = '01'
+			  AND account_kind3 = '003'
+			  AND account_kind4 = '0001'
+			  AND del_flg = '0'
+	    ORDER BY account_code
+	</select>
+	
+	<select id="getMaxTorihikisakiCode" resultType="String">
+		SELECT IFNULL(MAX(torihikisaki_code),0)
+		FROM TORIHIKISAKI_M
+	</select>
+
+	<insert id="insertTorihikisakiData" parameterType="String">
+		insert into TORIHIKISAKI_M
+			(company_code,
+			torihikisaki_code,
+			torihikisaki_type,
+			torihikisaki_name,
+			torihikisaki_name_kana,
+			account_code,
+			del_flg,
+			reg_date,
+			upd_date)
+		values (
+			#{companyCode},
+            #{torihikiCode},
+            #{torihikiType},
+			#{torihikiName},
+			#{torihikiKana},
+			#{comboSelectedCode},
+			0,
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<update id="updateTorihikisakiDataMultiple" parameterType="String">
+		UPDATE 
+			TORIHIKISAKI_M
+		SET
+			torihikisaki_name = #{torihikiName},
+			torihikisaki_name_kana = #{kana},
+			upd_date = current_timestamp
+        WHERE
+			company_code = #{companyCode} AND
+            torihikisaki_code = #{torihikiCode} AND
+            del_flg = '0'
+	</update>
+	
+	<update id="updateTorihikisakiDataOnly" parameterType="String">
+		UPDATE 
+			TORIHIKISAKI_M
+		SET
+			del_flg = #{delFlg},
+			<if test="delFlg != 1">
+				account_code = #{supplierCode},
+			</if>
+			upd_date = current_timestamp
+        WHERE
+			company_code = #{companyCode} AND
+            torihikisaki_code = #{torihikiCode} AND
+            torihikisaki_type = #{torihikisakiTypeKbn}
+	</update>
+	
+	<select id="existJudgeSelect" resultType="String">
+		SELECT
+			count(torihikisaki_code)
+		FROM
+			TORIHIKISAKI_M
+        WHERE
+			company_code = #{companyCode} AND
+            torihikisaki_code = #{torihikiCode} AND
+            torihikisaki_type = #{torihikisakiType}
+	</select>
+	
+</mapper>

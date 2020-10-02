@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="a2_search" hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A2SearchController">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+ 		<Button onMouseClicked="#onSearchData" styleClass="btn, btn-sm, btn-success" text="検索(F1)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    
+    <GridPane styleClass="gridPane-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName1" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode1" styleClass="text-hidden" text="" visible="false" />
+            <Text fx:id="hintKbn" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName2" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode2" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName3" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode3" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName4" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode4" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName5" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode5" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName6" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode6" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName7" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode7" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+          <children>
+            <Text fx:id="hintName8" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode8" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName9" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode9" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName10" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode10" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName11" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode11" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName12" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode12" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName13" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode13" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName14" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode14" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+          <children>
+            <Text fx:id="hintName15" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode15" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName16" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode16" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName17" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode17" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName18" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode18" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName19" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode19" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName20" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode20" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName21" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode21" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="2.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+	  <children>
+        <Text styleClass="text-white,strong" text="仕訳検索" />
+      </children>
+      <GridPane.margin>
+        <Insets top="0.0" />
+      </GridPane.margin>
+    </TextFlow>
+	<GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+      <children>
+      	<Label minWidth="130.0" prefWidth="130.0" styleClass="strong" text="取引発生日" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+	    	<children>
+	    	    <DatePicker fx:id="searchStartDate" promptText="yyyy/MM/dd" />
+	        </children>
+	    </TextFlow>
+      	<Label text="～" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      	<TextFlow GridPane.columnIndex="3" GridPane.rowIndex="0">
+	    	<children>
+	    	    <DatePicker fx:id="searchEndDate" promptText="yyyy/MM/dd" />
+	        </children>
+	    </TextFlow>
+      	
+        <Label styleClass="strong" text="取引先" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+            <TextField fx:id="searchSuppliersName" minWidth="200.0" onAction="#onSuppliersNameEnter" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchSuppliersCode" styleClass="text-hidden" text="" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        
+        <Label styleClass="strong" text="摘　要" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <children>
+            <TextField fx:id="searchTekiyoName" minWidth="200.0" onAction="#onTekiyoNameEnter" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchTekiyoCode" styleClass="text-hidden" text="" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        
+        <Label styleClass="strong" text="借方勘定科目" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="3">
+          <children>
+            <TextField fx:id="searchDebitName" minWidth="200.0" onAction="#onDebitAccountNameEnter" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchDebitCode" styleClass="text-hidden" text="" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+        
+        <Label styleClass="strong" text="貸方勘定科目" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="4">
+          <children>
+            <TextField fx:id="searchCreditName" minWidth="200.0" onAction="#onCreditAccountNameEnter" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchCreditCode" styleClass="text-hidden" text="" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+        
+        <Label styleClass="strong" text="金　額" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="5">
+          <children>
+            <TextField fx:id="searchAmountMoneyStart" minWidth="200.0" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        <Label text="～" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+      	<TextFlow GridPane.columnIndex="3" GridPane.rowIndex="5">
+          <children>
+            <TextField fx:id="searchAmountMoneyEnd" minWidth="200.0" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+        
+        <Label styleClass="strong" text="入金・支払予定日" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+        <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="6">
+	    	<children>
+	    	    <DatePicker fx:id="searchDepPayStartDate" promptText="yyyy/MM/dd" />
+	        </children>
+	    </TextFlow>
+      	<Label text="～" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+      	<TextFlow GridPane.columnIndex="3" GridPane.rowIndex="6">
+	    	<children>
+	    	    <DatePicker fx:id="searchDepPayEndDate" promptText="yyyy/MM/dd" />
+	        </children>
+	    </TextFlow>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

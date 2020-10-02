@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A3Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+        <Button onMouseClicked="#onReloadData" styleClass="btn, btn-sm, btn-success" text="決算項目整理(XX)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+ 		<Button onMouseClicked="#onRegistData" styleClass="btn, btn-sm, btn-success" text="決算登録(XX)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <ScrollPane GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" fitToWidth="true">
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="5.0" top="0.0" />
+      </padding>
+      <content>
+        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <children>
+        
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+		       <children>
+		          <Text styleClass="text-white,strong" text="棚卸し" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+		      <children>
+			    <TableView fx:id="settlementTable1" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney1" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal1" fx:id="btnFinal1" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+		       <children>
+		          <Text styleClass="text-white,strong" text="減価償却" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4">
+		      <children>
+			    <TableView fx:id="settlementTable2" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney2" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal2" fx:id="btnFinal2" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
+		       <children>
+		          <Text styleClass="text-white,strong" text="引当金" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="6">
+		      <children>
+			    <TableView fx:id="settlementTable3" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney3" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal3" fx:id="btnFinal3" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7">
+		       <children>
+		          <Text styleClass="text-white,strong" text="法人税等" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="8">
+		      <children>
+			    <TableView fx:id="settlementTable4" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney4" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal4" fx:id="btnFinal4" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="9">
+		       <children>
+		          <Text styleClass="text-white,strong" text="評価損益" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="10">
+		      <children>
+			    <TableView fx:id="settlementTable5" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney5" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal5" fx:id="btnFinal5" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="11">
+		       <children>
+		          <Text styleClass="text-white,strong" text="為替取引" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="12">
+		      <children>
+			    <TableView fx:id="settlementTable6" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney6" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal6" fx:id="btnFinal6" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="13">
+		       <children>
+		          <Text styleClass="text-white,strong" text="未払費用" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="14">
+		      <children>
+			    <TableView fx:id="settlementTable7" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney7" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal7" fx:id="btnFinal7" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="15">
+		       <children>
+		          <Text styleClass="text-white,strong" text="消費税" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="16">
+		      <children>
+			    <TableView fx:id="settlementTable8" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney8" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal8" fx:id="btnFinal8" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+		    
+		    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="17">
+		       <children>
+		          <Text styleClass="text-white,strong" text="その他" />
+		       </children>
+		       <GridPane.margin>
+		          <Insets top="0.0" />
+		       </GridPane.margin>
+		    </TextFlow>
+		    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="18">
+		      <children>
+			    <TableView fx:id="settlementTable9" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+			       <columns>
+			          <TableColumn fx:id="accrualDate9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="発生日" />
+			          <TableColumn fx:id="accountName9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="勘定科目" />
+			          <TableColumn fx:id="counterAccountName9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="相手勘定科目" />
+			          <TableColumn fx:id="tekiyoName9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="摘要" />
+			          <TableColumn fx:id="taxName9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税" />
+			          <TableColumn fx:id="debitAmountMoney9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="借方金額" />
+			          <TableColumn fx:id="creditAmountMoney9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="貸方金額" />
+			          <TableColumn fx:id="balanceMoney9" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" style="-fx-alignment: center-right;" text="残高" />
+			       </columns>
+			       <columnResizePolicy>
+			          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			       </columnResizePolicy>
+			       <GridPane.margin>
+			          <Insets bottom="5.0" />
+			       </GridPane.margin>
+			    </TableView>
+			    <Button onMouseClicked="#onFinal9" fx:id="btnFinal9" styleClass="btn, btn-sm, btn-warning" text="確定" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		      </children>
+		      <columnConstraints>
+		        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+		      </columnConstraints>
+		      <rowConstraints>
+		        <RowConstraints />
+		            <RowConstraints />
+		      </rowConstraints>
+		      <opaqueInsets>
+		        <Insets />
+		      </opaqueInsets>
+		      <padding>
+		        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+		      </padding>
+		      <GridPane.margin>
+		        <Insets bottom="15.0" left="0.0" right="0.0" top="0.0" />
+		      </GridPane.margin>
+		    </GridPane>
+        
+        
+        </children>
+	    <columnConstraints>
+	      <ColumnConstraints hgrow="ALWAYS" />
+	    </columnConstraints>
+	    <rowConstraints>
+	      <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+                  <RowConstraints />
+	    </rowConstraints>
+        </GridPane>
+      </content>
+    </ScrollPane>
+    
+    
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+</GridPane>

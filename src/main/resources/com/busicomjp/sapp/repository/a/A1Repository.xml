@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.a.A1Repository">
+    <resultMap id="ComboItemResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+    <resultMap id="BalanceDataResult" type="com.busicomjp.sapp.model.a.BalanceData">
+    </resultMap>
+    <resultMap id="JournalEntryDataResult" type="com.busicomjp.sapp.model.a.JournalEntryData">
+    </resultMap>
+    <resultMap id="BalanceDtoResult" type="com.busicomjp.sapp.dto.a.BalanceDto">
+    </resultMap>
+	
+	<select id="getRealBalanceDataList" resultMap="BalanceDataResult" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+	    WITH realBalance AS (
+		    SELECT
+			  account_code,
+			  ( SUM(debit_amount_money) - SUM(credit_amount_money) ) balance
+			FROM GENERAL_LEDGER
+			WHERE company_code = #{companyCode}
+			AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+			GROUP BY account_code
+	    )
+	    SELECT 
+	      '11' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '1'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '001'
+	    AND account_kind4 = '0001'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '12' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '1'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '001'
+	    AND ( account_kind4 = '0002' OR account_kind4 = '0003' OR account_kind4 = '0004' OR account_kind4 = '0005' OR account_kind4 = '0008' )
+	    
+	    UNION
+	    
+	    SELECT 
+	      '13' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '1'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '003'
+	    AND account_kind4 = '0001'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '14' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '1'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '003'
+	    AND account_kind4 = '0002'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '21' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '2'
+	    AND account_kind2 = '01'
+	    AND (
+	      ( account_kind3 = '001' AND account_kind4 = '0001' ) 
+	      OR ( account_kind3 = '002' AND account_kind4 = '0002' )
+	    )
+	    
+	    UNION
+	    
+	    SELECT 
+	      '22' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '2'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '001'
+	    AND account_kind4 = '0002'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '23' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '2'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '003'
+	    AND ( account_kind4 = '0001' OR account_kind4 = '0002' OR account_kind4 = '0003' OR account_kind4 = '0004')
+	    
+	    UNION
+	    
+	    SELECT 
+	      '31' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '2'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '003'
+	    AND account_kind4 = '0019'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '32' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '2'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '003'
+	    AND account_kind4 = '0018'
+	    
+	    UNION
+	    
+	    SELECT 
+	      '33' as kbn,
+	      IFNULL(SUM(b.balance),0) balance
+	    FROM ACCOUNT_M am
+	    INNER JOIN realBalance b
+	    ON am.company_code = #{companyCode}
+	    AND am.account_code = b.account_code
+	    WHERE account_kind1 = '1'
+	    AND account_kind2 = '01'
+	    AND account_kind3 = '005'
+	    AND account_kind4 = '0010'	    
+	</select>
+	
+	<select id="getExpectBalanceData" resultType="Long" parameterType="String">
+	    SELECT IFNULL(SUM(amount_money), 0) balance
+	    FROM JOURNAL_ENTRY
+	    WHERE company_code = #{companyCode}
+	    AND kind_code IS NOT NULL
+	    AND dep_pay_date BETWEEN #{startDay} AND #{endDay}
+	</select>
+
+	<select id="getJournalEntryDataList" resultMap="JournalEntryDataResult" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+		SELECT 
+		    ta.journal_no journalNo,
+		    concat(substr(ta.accrual_date, 1, 4), '/', substr(ta.accrual_date, 5, 2), '/', substr(ta.accrual_date, 7, 2)) accrualDate,
+		    FORMAT(ta.amount_money,0) amountMoney,
+		    FORMAT(ta.amount_money_tax,0) tax,
+		    concat(substr(ta.dep_pay_date, 1, 4), '/', substr(ta.dep_pay_date, 5, 2), '/', substr(ta.dep_pay_date, 7, 2)) depPayDate,
+		    IFNULL(mt.torihikisaki_name, "") suppliersName,
+		    ms.tekiyo_name tekiyoName,
+		    ma1.account_name debitName,
+		    ma2.account_name creditName,
+		    tm.tax_name taxRate,
+		    ta.kind_code kindCode,
+		    ta.debit_account debitAccount,
+		    ta.credit_account creditAccount,
+		    ta.red_flg redFlg
+		FROM
+		    (
+		        SELECT
+		            journal_no,
+		            kind_code,
+		            accrual_date,
+		            amount_money,
+		            amount_money_tax,
+		            dep_pay_date,
+		            suppliers_code,
+		            tekiyo_code,
+		            debit_account,
+		            credit_account,
+		            tax_code,
+		            red_flg
+		        FROM JOURNAL_ENTRY
+		        WHERE company_code = #{companyCode}
+		        AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		        AND debit_account NOT IN ('997', '998')
+		        AND credit_account NOT IN ('997', '998')
+		        ORDER BY journal_no DESC
+		        limit 10
+		    ) ta
+		  LEFT JOIN TORIHIKISAKI_M mt
+		  ON  (mt.company_code = #{companyCode}
+		      AND ta.suppliers_code = mt.torihikisaki_code)
+		  LEFT JOIN
+		      (SELECT DISTINCT
+		              tekiyo_code,
+		              tekiyo_name
+		          FROM SUMMARY_M
+		          WHERE company_code = #{companyCode}
+		      ) ms
+		  ON  ( ta.tekiyo_code = ms.tekiyo_code)
+	      LEFT JOIN ACCOUNT_M ma1
+		  ON  ( ma1.company_code = #{companyCode}
+		      AND ta.debit_account = ma1.account_code
+		      AND ma1.agg_flg = '1' )
+		  LEFT JOIN ACCOUNT_M ma2
+		  ON  ( ma2.company_code = #{companyCode}
+		      AND ta.credit_account = ma2.account_code
+		      AND ma2.agg_flg = '1' )
+		  LEFT JOIN TAX_M tm
+		  ON ( ta.tax_code = tm.tax_code )
+		  ORDER BY journalNo
+	</select>
+	
+	<select id="getSelectedAccountList" resultMap="ComboItemResult" parameterType="com.busicomjp.sapp.dto.a.InputDataDto">
+		SELECT 
+		    a.account_code code,
+		    a.account_name name,
+		    c.kind_flg 'option'
+		FROM CREDIT_DEBIT_KIND_M c 
+		INNER JOIN ACCOUNT_M a
+		ON c.kind_code = #{selectCode} 
+		AND a.company_code = #{companyCode}
+		AND a.use_flg = '1'
+		AND a.account_kind1 = c.account_kind1
+		AND a.account_kind2 = c.account_kind2
+		AND a.account_kind3 = c.account_kind3
+		AND a.account_kind4 = c.account_kind4
+		ORDER BY a.account_kind1, a.account_kind2, a.account_kind3, a.account_kind4, code
+	</select>
+	
+	<select id="getGeneralLedgerDataList" resultType="com.busicomjp.sapp.dto.a.GeneralLedgerDto" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		SELECT
+		    company_code companyCode,
+		    journal_no journalNo,
+		    general_no generalNo,
+		    accrual_date accrualDate,
+		    account_code accountCode,
+		    counter_account counterAccount,
+		    debit_amount_money debitAmountMoney,
+		    credit_amount_money creditAmountMoney
+		FROM GENERAL_LEDGER
+		WHERE company_code = #{companyCode}
+		AND journal_no = #{journalNo}
+		ORDER BY general_no
+	</select>
+	
+	<delete id="deleteJournalEntryData" parameterType="com.busicomjp.sapp.dto.a.JournalEntryDto">
+		DELETE FROM JOURNAL_ENTRY
+		WHERE company_code = #{companyCode}
+		AND journal_no = #{journalNo}
+	</delete>
+	
+	<delete id="deleteGeneralLedgerData" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		DELETE FROM GENERAL_LEDGER
+		WHERE company_code = #{companyCode}
+		AND general_no = #{generalNo}
+	</delete>
+	
+</mapper>

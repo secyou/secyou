@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A2UpdateDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+  
+    <GridPane styleClass="bottom-border" vgap="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+        <Label styleClass="strong" prefWidth="130.0" text="取引先 : " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Label fx:id="suppliersNameLbl" prefWidth="180.0" styleClass="underline" text="取引先00000" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+        
+        <Label styleClass="strong" text="摘要 : " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <Label fx:id="tekiyoNameLbl" styleClass="underline" text="タクシー代" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        
+        <Label styleClass="strong" text="借方勘定科目 : " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <Label fx:id="debitNameLbl" styleClass="underline" text="借方勘定科目00000" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        
+        <Label styleClass="strong" text="貸方勘定科目 : " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+        <Label fx:id="creditNameLbl" styleClass="underline" text="貸方勘定科目00000" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+  
+    <Label styleClass="h5" text="変更前" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+      <children>
+      
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-lt, boder-radius-lt" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="取引発生日" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="金額(税込)" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="70.0" prefWidth="70.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="税額" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="130.0" prefWidth="130.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="税率" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-top, boder-radius-rt" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="入金・支払予定日" />
+          </children>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-balance, textflow-lb, boder-radius-lb" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="accrualDateTxt" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="amountMoneyTxt" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="taxTxt" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="taxRateTxt" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom, boder-radius-rb" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="depPayDateTxt" text="-" />
+          </children>
+        </TextFlow>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <Label styleClass="h5" text="変更後" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+      <children>
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-lt, boder-radius-lt" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="取引発生日" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="金額(税込)" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="70.0" prefWidth="70.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="税額" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="130.0" prefWidth="130.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="税率" />
+          </children>
+        </TextFlow>
+        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-top, boder-radius-rt" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="text-white, strong" text="入金・支払予定日" />
+          </children>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-balance, textflow-lb, boder-radius-lb" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField minWidth="98.0" prefWidth="98.0" fx:id="newAccrualDate" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField minWidth="98.0" prefWidth="98.0" fx:id="newAmountMoney" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField minWidth="48.0" prefWidth="48.0" fx:id="newTax" disable="true" text="-" />
+          </children>
+        </TextFlow>
+        <TextFlow nodeOrientation="LEFT_TO_RIGHT" styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+          <children>
+            <ComboBox fx:id="newTaxRate" minWidth="108.0" prefWidth="108.0" />
+          </children>
+        </TextFlow>
+        <TextFlow styleClass="textflow-balance, textflow-bottom, boder-radius-rb" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+          	<TextField minWidth="98.0" prefWidth="98.0" fx:id="newDepPayDate" text="-" />
+          </children>
+        </TextFlow>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    <Label styleClass="h6,text-red" text="※取引先/摘要/借方勘定科目/貸方勘定科目は、直接変更できません。" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+    <Label styleClass="h6,text-red" text="※仕訳データを削除してから再登録することで、値を変更できます。" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+    
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="7" GridPane.vgrow="ALWAYS">
+      <children>
+        <Button onMouseClicked="#onUpdateData" styleClass="btn, btn-sm, btn-success" text="変更登録" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="15.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

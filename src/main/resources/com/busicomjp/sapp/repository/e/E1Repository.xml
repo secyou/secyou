@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.e.E1Repository">
+    <resultMap id="ComboItemResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+    <resultMap id="CarryForwardData" type="com.busicomjp.sapp.model.e.CarryForwardData">
+    </resultMap>
+    <resultMap id="BalanceDtoResult" type="com.busicomjp.sapp.dto.a.BalanceDto">
+    </resultMap>
+    <resultMap id="TorihikiResult" type="com.busicomjp.sapp.model.e.CarryForwardSubData">
+    </resultMap>
+
+
+	<select id="getAccountKind1DataList" resultMap="ComboItemResult" parameterType="String">
+
+		    select DISTINCT account_kind1 as code,account_kind1_name as name
+		    from ACCOUNT_M
+		    where account_kind1 != 9
+		    and company_code = #{companyCode}
+	</select>
+	<select id="getAccountKind2DataList" resultMap="ComboItemResult" parameterType="com.busicomjp.sapp.dto.e.InputDataDto">
+		    select DISTINCT account_kind2 as code,account_kind2_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{selectCode}
+	</select>
+	<select id="getAccountKind3DataList" resultMap="ComboItemResult" parameterType="com.busicomjp.sapp.dto.e.InputDataDto">
+		    select DISTINCT account_kind3 as code,account_kind3_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{selectCode}
+		    and account_kind2 = #{selectCode2}
+	</select>
+	<select id="getAccountKind4DataList" resultMap="ComboItemResult" parameterType="com.busicomjp.sapp.dto.e.InputDataDto">
+		    select DISTINCT account_kind4 as code,account_kind4_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{selectCode}
+		    and account_kind2 = #{selectCode2}
+		    and account_kind3 = #{selectCode3}
+	</select>
+	<select id="getAccountCodeDataList" resultMap="CarryForwardData" parameterType="com.busicomjp.sapp.dto.e.InputDataDto">
+		select a.account_code as accountCode
+		    	  ,a.account_name as accountName
+		     	  ,ifnull(b.amount_money,0) as debitAmountMoney
+		     	  ,ifnull(c.amount_money,0) as creditAmountMoney
+		     	  ,a.account_kind1 as accountKind1
+		     	  ,a.account_kind2 as accountKind2
+		     	  ,a.account_kind3 as accountKind3
+		     	  ,a.account_kind4 as accountKind4
+		     	  ,a.account_kind1_name as accountKind1Name
+		     	  ,a.account_kind2_name as accountKind2Name
+		     	  ,a.account_kind3_name as accountKind3Name
+		     	  ,a.account_kind4_name as accountKind4Name
+		     	  ,a.kind_flg as kindFlg
+		     	  ,CASE a.kind_flg
+		     	     WHEN '1' THEN '借'
+		     	     WHEN '2' THEN '貸'
+		     	     ELSE ''
+		     	  END kindName
+		    from ACCOUNT_M a
+		    left join (select
+		    					sum(amount_money) amount_money,
+		    					debit_account,
+		    					company_code,
+		    					credit_account
+		    			from 	JOURNAL_ENTRY
+		    			where 	credit_account = '997'
+		    			and		accrual_date = #{startDate}
+		    			group by company_code, debit_account,credit_account) b
+			on a.account_code = b.debit_account
+			and a.company_code = b.company_code
+			left join (select
+								sum(amount_money) amount_money,
+								debit_account,
+								company_code,
+								credit_account
+						from 	JOURNAL_ENTRY
+						where 	debit_account = '997'
+						and		accrual_date = #{startDate}
+						group by company_code, debit_account,credit_account) c
+			on a.account_code = c.credit_account
+			and a.company_code = c.company_code
+		    where a.account_kind1 != 9
+		    and a.company_code = #{companyCode}
+	</select>
+	<insert id="insertCompanyData" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		insert into JOURNAL_ENTRY
+			(company_code
+			,company_name
+			,kimatu_year
+			,kimatu_month_day
+			,tax_kind_flg
+			,tax_app_flg
+			,del_flg
+			,reg_date
+			,upd_date)
+		values (
+			#{companyCode},
+			#{companyName},
+			#{kimatuYear},
+			#{kimatuMonthDay},
+			#{taxKindFlg},
+			#{taxAppFlg},
+			#{delFlg},
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	<update id="updateJournalData" parameterType="String">
+		update JOURNAL_ENTRY
+		set
+			amount_money = #{amountMoney}
+		where company_code = #{companyCode}
+		and	  accrual_date = #{startDate}
+		and   debit_account = #{debitAccount}
+		and   credit_account = #{creditAccount}
+		<if test="suppliersCode != null ">
+		and   suppliers_code = #{suppliersCode}
+		</if>
+	</update>
+	<update id="updateGeneralData" parameterType="String">
+		update GENERAL_LEDGER
+		set
+			<if test="creditAccount == &quot;997&quot;">
+			   balance_money = #{amountMoney},
+		       debit_amount_money = #{amountMoney}
+		   </if>
+			<if test="debitAccount == &quot;997&quot;">
+			   balance_money = #{amountMoney} * -1,
+		       credit_amount_money = #{amountMoney}
+		   </if>
+		where company_code = #{companyCode}
+		and	  accrual_date = #{startDate}
+		and   counter_account = '997'
+		<if test="creditAccount == &quot;997&quot;">
+			and   account_code = #{debitAccount}
+		</if>
+		<if test="debitAccount == &quot;997&quot;">
+		 	and   account_code = #{creditAccount}
+		 </if>
+	</update>
+	<select id="selectJournalData" resultType="String" parameterType="String">
+		select amount_money
+		from JOURNAL_ENTRY
+		where company_code = #{companyCode}
+		and	  accrual_date = #{startDate}
+		and   debit_account = #{debitAccount}
+		and   credit_account = #{creditAccount}
+		<if test="suppliersCode != null ">
+		and   suppliers_code = #{suppliersCode}
+		</if>
+	</select>
+	<select id="selectGeneralBalanceMoney" resultMap="BalanceDtoResult" parameterType="String">
+		select 	IFNULL(balance_money,0) balanceMoney
+		    	,general_no generalNo
+		from GENERAL_LEDGER
+		where company_code = #{companyCode}
+		and	  accrual_date = #{startDate}
+		and   account_code = #{accountCode}
+		and   counter_account = '997'
+	</select>
+	<select id="selectTorihikiData" resultMap="TorihikiResult" parameterType="String">
+		select 	a.torihikisaki_code as torihikisakiCode
+		    	,a.torihikisaki_name as torihikisakiName
+		    	,ifnull(b.amount_money,0)  as debitAmountMoney
+		    	,ifnull(c.amount_money,0)  as creditAmountMoney
+		from TORIHIKISAKI_M a
+	    left join (select
+	    					amount_money,
+	    					debit_account,
+	    					company_code,
+	    					credit_account,
+	    					suppliers_code
+	    			from 	JOURNAL_ENTRY
+	    			where 	credit_account = '997'
+	    			and		accrual_date = #{startDate}) b
+		on a.torihikisaki_code = b.suppliers_code
+		and a.company_code = b.company_code
+		left join (select
+							amount_money,
+							debit_account,
+							company_code,
+							credit_account,
+							suppliers_code
+					from 	JOURNAL_ENTRY
+					where 	debit_account = '997'
+					and		accrual_date = #{startDate}) c
+		on a.torihikisaki_code = c.suppliers_code
+		and a.company_code = c.company_code
+		where a.account_code = #{accountCode}
+		and a.company_code = #{companyCode}
+	</select>
+</mapper>

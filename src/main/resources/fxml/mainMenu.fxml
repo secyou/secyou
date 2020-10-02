@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import org.kordamp.bootstrapfx.scene.layout.*?>
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.bootstrapfx.scene.layout.Panel?>
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.MainMenuController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="終了">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#onMenuExit" text="終了" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <GridPane fx:id="main_gp" hgap="10" styleClass="page" vgap="10" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <padding>
+            <Insets bottom="20" left="20" right="20" top="20" />
+          </padding>
+          <children>
+            <Panel styleClass="panel-app" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+              <heading>
+                <Label styleClass="h3" text="前期・翌年度登録" />
+              </heading>
+              <body>
+                <GridPane fx:id="sub_gp1" hgap="10" styleClass="page" vgap="10">
+                  <children>
+                    <Label onMouseClicked="#onClick_f0" styleClass="h4, label-link" text="会社新規登録" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label onMouseClicked="#onClick_e1" styleClass="h4, label-link" text="前期(初回)繰越登録" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label onMouseClicked="#onClick_e2" styleClass="h4, label-link" text="翌年度繰越登録" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                  </rowConstraints>
+                </GridPane>
+              </body>
+            </Panel>
+            <Panel styleClass="panel-app" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+              <heading>
+                <Label styleClass="h3" text="自動仕訳" />
+              </heading>
+              <body>
+                <GridPane fx:id="sub_gp2" hgap="10" styleClass="page" vgap="10">
+                  <children>
+                    <Label onMouseClicked="#onClick_a1" styleClass="h4, label-link" text="仕訳登録" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label onMouseClicked="#onClick_a2" styleClass="h4, label-link" text="仕訳帳" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label onMouseClicked="#onClick_a3" styleClass="h4, label-link" text="年度決算" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                  </rowConstraints>
+                </GridPane>
+              </body>
+            </Panel>
+            <Panel styleClass="panel-app" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+              <heading>
+                <Label styleClass="h3" text="会計帳簿" />
+              </heading>
+              <body>
+                <GridPane fx:id="sub_gp3" hgap="10" styleClass="page" vgap="10">
+                  <children>
+                    <Label onMouseClicked="#onClick_b1" styleClass="h4, label-link" text="合計残高試算表" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label onMouseClicked="#onClick_b2" styleClass="h4, label-link" text="総勘定元帳" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label onMouseClicked="#onClick_b3" styleClass="h4, label-link" text="資金収支表" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label onMouseClicked="#onClick_b4" styleClass="h4, label-link" text="売掛金集計表" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                    <Label onMouseClicked="#onClick_b5" styleClass="h4, label-link" text="買掛金集計表" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                    <Label onMouseClicked="#onClick_b6" styleClass="h4, label-link" text="未払金集計表" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                    <Label onMouseClicked="#onClick_c1" styleClass="h4, label-link" text="その他帳票出力" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                  </rowConstraints>
+                </GridPane>
+              </body>
+            </Panel>
+            <Panel styleClass="panel-app" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+              <heading>
+                <Label styleClass="h3" text="各種設定" />
+              </heading>
+              <body>
+                <GridPane fx:id="sub_gp4" hgap="10" vgap="10">
+                  <children>
+                    <Label onMouseClicked="#onClick_d1" styleClass="h4, label-link" text="会社情報管理" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                    <Label onMouseClicked="#onClick_d2" styleClass="h4, label-link" text="取引先管理" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                    <Label onMouseClicked="#onClick_d3" styleClass="h4, label-link" text="勘定科目管理" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                    <Label onMouseClicked="#onClick_d4" styleClass="h4, label-link" text="摘要管理" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                  </children>
+                  <columnConstraints>
+                    <ColumnConstraints />
+                  </columnConstraints>
+                  <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                  </rowConstraints>
+                </GridPane>
+              </body>
+            </Panel>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+          </rowConstraints>
+        </GridPane>
+      </children>
+      <VBox.margin>
+        <Insets bottom="100.0" left="150.0" right="150.0" top="100.0" />
+      </VBox.margin>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/styles.css" />
+  </stylesheets>
+</VBox>

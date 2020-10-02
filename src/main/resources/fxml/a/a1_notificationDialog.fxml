@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A1NotificationDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>  
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="自動仕訳" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+        <Label styleClass="h5" text="以下、手形振替の仕訳を自動作成します。" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+	      <children>
+	      
+	        <TextFlow minWidth="80.0" prefWidth="80.0" styleClass="textflow-balance, bg-color-green, textflow-lt, boder-radius-lt" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="分類" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="120.0" prefWidth="120.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="取引発生日" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="130.0" prefWidth="130.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="借方勘定科目" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="130.0" prefWidth="130.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="貸方勘定科目" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="100.0" prefWidth="100.0" styleClass="textflow-balance, bg-color-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="金額" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="150.0" prefWidth="150.0" styleClass="textflow-balance, bg-color-green, textflow-top, boder-radius-rt" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white, strong" text="入金・支払予定日" />
+	          </children>
+	        </TextFlow>
+	        
+	        <TextFlow styleClass="textflow-balance, textflow-lb" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text text="入金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billMaturityDate1" text="-" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text text="通常預金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text text="受取手形" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billKingaku1" text="-" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billMaturityDate2" text="-" />
+	          </children>
+	        </TextFlow>
+	        
+	        <TextFlow styleClass="textflow-balance, textflow-lb, boder-radius-lb" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text text="出金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billMaturityDate3" text="-" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billAccount" text="-" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text text="通常預金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billKingaku2" text="-" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom, boder-radius-rb" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="billMaturityDate4" text="-" />
+	          </children>
+	        </TextFlow>
+	        
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <Button onMouseClicked="#onOK" styleClass="btn, btn-sm, btn-success" text="OK" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

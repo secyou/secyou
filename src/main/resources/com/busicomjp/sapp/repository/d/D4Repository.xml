@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.d.D4Repository">
+	<resultMap id="SummaryMainData" type="com.busicomjp.sapp.model.d.TekiyoData">
+    </resultMap>
+    <resultMap id="ComboItemResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+
+	<select id="selectSummaryMainData" resultMap="SummaryMainData" parameterType="String">
+		SELECT
+			s.tekiyo_code tekiyoCode,
+			s.tekiyo_name tekiyoName,
+			s.tekiyo_name_kana tekiyoNameKana,
+			s.account_kind accountKind,
+			s.account_code accountCode,
+			s.del_flg summaryDelFlg,
+			a.account_name accountName
+		FROM SUMMARY_M s left join ACCOUNT_M a
+			on s.account_code = a.account_code and s.company_code = a.company_code
+		WHERE s.company_code = #{companyCode}
+			  <if test="searchName != null">
+			      AND s.tekiyo_name LIKE CONCAT('%', #{searchName}, '%')
+			  </if>
+			  <if test="searchTekiyo_name_kana != null">
+			      AND s.tekiyo_name_kana LIKE CONCAT('%', #{searchTekiyo_name_kana}, '%')
+			  </if>
+		ORDER BY s.tekiyo_code,s.account_kind
+	</select>
+	<select id="getKind1DataList" resultMap="ComboItemResult" parameterType="String">
+
+		    select DISTINCT account_kind1 as code,account_kind1_name as name
+		    from ACCOUNT_M
+		    where account_kind1 != 9
+		    and company_code = #{companyCode}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+	</select>
+	<select id="getKind2DataList" resultMap="ComboItemResult" parameterType="String">
+		    select DISTINCT account_kind2 as code,account_kind2_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{code1}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+	</select>
+	<select id="getKind3DataList" resultMap="ComboItemResult" parameterType="String">
+		    select DISTINCT account_kind3 as code,account_kind3_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{code1}
+		    and account_kind2 = #{code2}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+	</select>
+	<select id="getKind4DataList" resultMap="ComboItemResult" parameterType="String">
+		    select DISTINCT account_kind4 as code,account_kind4_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{code1}
+		    and account_kind2 = #{code2}
+		    and account_kind3 = #{code3}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+	</select>
+	<select id="getKindDataList" resultMap="ComboItemResult" parameterType="String">
+		    select DISTINCT account_code as code,account_name as name
+		    from ACCOUNT_M
+		    where company_code = #{companyCode}
+		    and account_kind1 = #{code1}
+		    and account_kind2 = #{code2}
+		    and account_kind3 = #{code3}
+		    and account_kind4 = #{code4}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+	</select>
+	
+	<select id="getMaxSummaryCd" resultType="String">
+		SELECT 
+			max(tekiyo_code)
+		FROM 
+			SUMMARY_M
+		WHERE 
+			company_code = #{companyCode}
+	</select>
+
+	<insert id="insertSummaryMain" parameterType="String">
+		insert into SUMMARY_M
+			(company_code,
+			tekiyo_code,
+			tekiyo_name,
+			tekiyo_name_kana,
+			account_kind,
+			account_code,
+			del_flg,
+			reg_date,
+			upd_date)
+		values (
+			#{companyCd},
+            #{tekiyoCd},
+			#{name},
+			#{nameKana},
+			#{accountKind},
+			#{accountCode},
+			0,
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<select id="getSelectedKindData" resultMap="SummaryMainData" parameterType="String">
+		    select 
+		    	account_kind1 as accountKind1,
+		    	account_kind1_name as accountKind1Name,
+		    	account_kind2 as accountKind2,
+		    	account_kind2_name as accountKind2Name,
+		    	account_kind3 as accountKind3,
+		    	account_kind3_name as accountKind3Name,
+		    	account_kind4 as accountKind4,
+		    	account_kind4_name as accountKind4Name,
+		    	account_code as accountCode
+		    from ACCOUNT_M
+		    where account_kind1 != 9
+		    and company_code = #{companyCode}
+		    and account_name = #{name}
+		    <if test="kindKbnFlg == 2">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 003
+		    </if>
+		    <if test="kindKbnFlg == 3">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 01
+		    	and account_kind3 = 004
+		    </if>
+		    <if test="kindKbnFlg == 4">
+		    	and account_kind1 = 5
+		    	and account_kind2 = 03
+		    	and account_kind3 = 004
+		    	and account_kind4 = 0001
+		    </if>
+		    limit 1
+	</select>
+	
+	<select id="getDataByselected" resultMap="SummaryMainData" parameterType="String">
+		    select 
+				account_kind as accountKind,
+				tekiyo_name as tekiyoName,
+				tekiyo_name_kana as tekiyoNameKana,
+				account_code as accountCode
+		    from SUMMARY_M
+		    where
+		    	company_code = #{companyCode}
+		    	and tekiyo_code = #{tekiyoCode}
+	</select>
+
+	<delete id="deleteSummary" parameterType="String">
+		delete from 
+			SUMMARY_M
+		where
+		    company_code = #{companyCd}
+		    and account_code = #{accountCode}
+		    and tekiyo_code = #{tekiyoCd}
+		    and account_kind = #{accountKind}
+	</delete>
+
+	<update id="updateSummary" parameterType="String">
+		update 
+			SUMMARY_M
+		set
+			tekiyo_name = #{name},
+			tekiyo_name_kana = #{nameKana},
+			account_code = #{accountCode},
+			upd_date = current_timestamp
+		where
+		    company_code = #{companyCd}
+		    and tekiyo_code = #{tekiyoCd}
+		    and account_kind = #{accountKind}
+	</update>
+</mapper>

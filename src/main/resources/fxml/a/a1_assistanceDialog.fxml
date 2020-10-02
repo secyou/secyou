@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A1AssistanceDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>  
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="入力" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+        <Label styleClass="h5" text="手形の満期日を入力してください。" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+      	<Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="手形満期日" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+            <TextField fx:id="billMaturityDate" minWidth="200.0" prefWidth="200.0" promptText="YYYYMMDD" />
+          </children>
+        </TextFlow>
+        <Label text="" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" />
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <Button onMouseClicked="#onInputData" styleClass="btn, btn-sm, btn-success" text="OK" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

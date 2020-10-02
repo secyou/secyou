@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.b.B3Repository">
+	<resultMap id="mapResult" type="java.util.HashMap">
+        <result property="yearMonth" column="yearMonth"/>
+        <result property="totalMoney" column="totalMoney" />
+    </resultMap>
+	<select id="selectAllTotalMoney" parameterType="String" resultType="long">
+	SELECT
+	    SUM(g.debit_amount_money - g.credit_amount_money) AS money
+	FROM
+	    GENERAL_LEDGER g
+	    INNER JOIN (
+	        SELECT
+	            company_code, account_code
+	        FROM
+	            ACCOUNT_M
+	        WHERE
+	            company_code = #{companyCode}
+	            AND account_kind1 = '1'
+	            AND account_kind2 = '01'
+	            AND account_kind3 = '001'
+	            AND account_kind4 IN ('0001', '0003', '0004', '0005', '0008')
+	    ) a ON
+	    g.company_code = a.company_code
+	    AND g.account_code = a.account_code
+	WHERE
+	    g.company_code = #{companyCode}
+	    AND g.counter_account = #{accountCodeCarryforward}
+	    AND concat(substr(g.accrual_date, 1, 4), substr(g.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth} 
+	</select>
+	<select id="selectTotalMoneyByAccount" parameterType="String" resultMap="mapResult">
+    SELECT
+       a.accrual_date AS yearMonth
+       <choose>
+	       <when test="paymentFlag">
+	           ,SUM(a.money) * -1 AS totalMoney
+	       </when>
+	       <otherwise>
+	           ,SUM(a.money) AS totalMoney
+	       </otherwise>
+       </choose>
+    FROM
+    (
+        SELECT
+            concat(substr(g.accrual_date, 1, 4), substr(g.accrual_date, 5, 2)) AS accrual_date
+            <choose>
+                <when test="aggregateMethod == 2">
+                    ,g.debit_amount_money AS money
+                </when>
+                <when test="aggregateMethod == 3">
+                    ,(g.credit_amount_money - g.debit_amount_money) AS money
+                </when>
+                <when test="aggregateMethod == 4">
+                    ,g.credit_amount_money AS money
+                </when>
+                <otherwise>
+                    ,(g.debit_amount_money - g.credit_amount_money) AS money
+                </otherwise>
+            </choose>
+        FROM
+            GENERAL_LEDGER g
+            INNER JOIN (
+                SELECT
+                    company_code, account_code
+                FROM
+                    ACCOUNT_M
+                WHERE
+                    company_code = #{companyCode}
+                    AND account_kind1 = #{accountKind1}
+                    AND account_kind2 = #{accountKind2}
+                    AND account_kind3 = #{accountKind3}
+                    <if test="accountKind4List != null">
+                    <choose>
+                        <when test="accountKind4List.size() == 1">
+                            AND account_kind4 = #{accountKind4List[0]}
+                        </when>
+                        <otherwise>
+                            <choose>
+				                <when test="accountKind4EqIn">
+				                    AND account_kind4 IN
+				                </when>
+				                <otherwise>
+				                    AND account_kind4 NOT IN
+				                </otherwise>
+				            </choose>
+                            <foreach item="accountKind4" collection="accountKind4List" open="(" separator="," close=")">
+						        #{accountKind4}
+						    </foreach>
+                        </otherwise>
+                    </choose>
+                    </if>
+            ) a ON
+            g.company_code = a.company_code
+            <choose>
+                <when test="aggregateAccountCode">
+                    AND g.account_code = a.account_code
+                </when>
+                <otherwise>
+                    AND g.counter_account = a.account_code
+                </otherwise>
+            </choose>
+        WHERE
+            g.company_code = #{companyCode}
+            AND g.counter_account != #{accountCodeCarryforward}
+            AND g.counter_account != #{accountCodeNextCarryforward}
+            AND concat(substr(g.accrual_date, 1, 4), substr(g.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth}
+    ) a
+    GROUP BY
+        a.accrual_date
+    </select>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.e.E1RegistCarryForwardForTorihikisakiDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="前期繰越登録" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+
+        <GridPane styleClass="bottom-border" vgap="5.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+	      <children>
+	        <Label prefWidth="155.0" styleClass="strong" text="勘定科目 : " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	        <Label fx:id="accountName" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+	        <Label styleClass="strong" text="分類 : " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	        <Label fx:id="accountKind" prefWidth="200.0" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+	        <Label styleClass="strong" text="借方金額合計 : " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+	        <Label fx:id="newDebitAmountMoney" prefWidth="200.0" styleClass="underline" text="0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+	        <Label styleClass="strong" text="貸方金額合計 : " GridPane.columnIndex="0" GridPane.rowIndex="3" />
+	        <Label fx:id="newCreditAmountMoney" prefWidth="200.0" styleClass="underline" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	        <RowConstraints />
+	            <RowConstraints />
+	            <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="10.0" />
+	      </GridPane.margin>
+	    </GridPane>
+
+	    <Label styleClass="h6,text-blue" text="金額を直接クリックして、編集してください。" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	    <TableView fx:id="carryforwardDataTable" prefHeight="400.0" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <columns>
+            <TableColumn fx:id="torihikisakiName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="取引先" />
+            <TableColumn fx:id="debitAmountMoney" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="借方金額" style="-fx-alignment: center-right;" />
+            <TableColumn fx:id="creditAmountMoney" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="貸方金額" style="-fx-alignment: center-right;" />
+          </columns>
+          <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+          </columnResizePolicy>
+          <GridPane.margin>
+            <Insets bottom="5.0" />
+          </GridPane.margin>
+        </TableView>
+
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    <Button onMouseClicked="#onRegistCarryForward" styleClass="btn, btn-sm, btn-success" text="登録" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

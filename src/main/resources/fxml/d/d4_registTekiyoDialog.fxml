@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.d.D4RegistTekiyoDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="摘要入力" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="科目区分" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+	      <children>
+	 		<CheckBox fx:id="checkbox1" mnemonicParsing="false" text="通常" prefWidth="60.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	 		<CheckBox fx:id="checkbox2" mnemonicParsing="false" text="販売" prefWidth="60.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	 		<CheckBox fx:id="checkbox3" mnemonicParsing="false" text="管理" prefWidth="60.0" prefHeight="30.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+	 		<CheckBox fx:id="checkbox4" mnemonicParsing="false" text="原価" prefWidth="60.0" prefHeight="30.0" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+      
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="摘要名称" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+            <TextField fx:id="inputTekiyoName" minWidth="350.0" prefWidth="350.0" />
+          </children>
+        </TextFlow>
+        
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="摘要名称(かな)" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <children>
+            <TextField fx:id="inputTekiyoNameKana" minWidth="350.0" prefWidth="350.0" />
+          </children>
+        </TextFlow>
+        
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="紐づけ勘定科目(通常)" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" GridPane.vgrow="NEVER">
+	      <children>
+	 		<TextFlow GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="defaultKind1Combo" onAction="#onSelect11Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="defaultKind2Combo" onAction="#onSelect12Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="defaultKind3Combo" onAction="#onSelect13Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="defaultKind4Combo" onAction="#onSelect14Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="4" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="defaultAccountCombo" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+        
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="紐づけ勘定科目(販売)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.vgrow="NEVER">
+	      <children>
+	 		<TextFlow GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="salesKind1Combo" onAction="#onSelect21Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="salesKind2Combo" onAction="#onSelect22Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="salesKind3Combo" onAction="#onSelect23Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="salesKind4Combo" onAction="#onSelect24Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="4" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="salesAccountCombo" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+        
+        <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="紐づけ勘定科目(管理)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.vgrow="NEVER">
+	      <children>
+	 		<TextFlow GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="mgmtKind1Combo" onAction="#onSelect31Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="mgmtKind2Combo" onAction="#onSelect32Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="mgmtKind3Combo" onAction="#onSelect33Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="mgmtKind4Combo" onAction="#onSelect34Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="4" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="mgmtAccountCombo" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+	    
+	    <Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="紐づけ勘定科目(原価)" GridPane.columnIndex="0" GridPane.rowIndex="6" />
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="6" GridPane.vgrow="NEVER">
+	      <children>
+	 		<TextFlow GridPane.columnIndex="0" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="costKind1Combo" onAction="#onSelect41Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="costKind2Combo" onAction="#onSelect42Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="2" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="costKind3Combo" onAction="#onSelect43Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="3" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="costKind4Combo" onAction="#onSelect44Enter" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+            <TextFlow GridPane.columnIndex="4" GridPane.rowIndex="0">
+              <children>
+                <ComboBox fx:id="costAccountCombo" prefWidth="150.0" />
+              </children>
+            </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+            <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <Button onMouseClicked="#onRegistTekiyo" styleClass="btn, btn-sm, btn-success" text="登録" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

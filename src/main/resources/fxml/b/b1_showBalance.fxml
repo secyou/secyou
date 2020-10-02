@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.TextFlow?>
+
+<GridPane fx:id="b1_show" hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.b.B1Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    <GridPane hgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+      <children>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	      <children>
+	        <Label fx:id="label_1" text="" textAlignment="CENTER" />
+	      </children>
+	    </TextFlow>
+	    <TextFlow textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	      <children>
+	        <Label fx:id="label_2" text="" textAlignment="CENTER" />
+	      </children>
+	    </TextFlow>
+	    <TextFlow textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	      <children>
+	        <Label fx:id="label_3" text="" textAlignment="CENTER" />
+	      </children>
+	    </TextFlow>
+	    <TextFlow textAlignment="CENTER" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	      <children>
+	        <Label fx:id="label_4" text="" textAlignment="CENTER" />
+	      </children>
+	    </TextFlow>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints halignment="CENTER" />
+        <ColumnConstraints halignment="CENTER" />
+        <ColumnConstraints halignment="CENTER" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TableView fx:id="balanceDataTable" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	  <columns>
+	    <TableColumn fx:id="accountName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" text="勘定科目" />
+	    <TableColumn maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="前期繰越">
+	        <columns>
+                <TableColumn fx:id="debitCFBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="借方" />
+                <TableColumn fx:id="creditCFBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="貸方" />
+            </columns>
+        </TableColumn>
+        <TableColumn maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="当期発生">
+	        <columns>
+                <TableColumn fx:id="debitBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="借方" />
+                <TableColumn fx:id="creditBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="貸方" />
+            </columns>
+        </TableColumn>
+        <TableColumn maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="期末残高">
+	        <columns>
+                <TableColumn fx:id="debitTotalBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="借方" />
+                <TableColumn fx:id="creditTotalBalance_s" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" styleClass="text-link" text="貸方" />
+            </columns>
+        </TableColumn>
+	  </columns>
+		<columnResizePolicy>
+	        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+	    </columnResizePolicy>
+    </TableView>
+
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

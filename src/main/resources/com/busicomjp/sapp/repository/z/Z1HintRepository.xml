@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.z.Z1HintRepository">
+	<resultMap id="HintDataResult" type="com.busicomjp.sapp.model.z.HintResultData">
+    </resultMap>
+    <resultMap id="AccountDataResult" type="com.busicomjp.sapp.model.z.AccountData">
+    </resultMap>
+
+	<select id="getTekiyoHintDataList" resultMap="HintDataResult" parameterType="com.busicomjp.sapp.dto.z.HintParams">
+		SELECT DISTINCT
+		    tekiyo_code hintResultCode,
+		    tekiyo_name	hintResultName    
+		FROM SUMMARY_M
+		WHERE company_code = #{companyCode}
+		AND ( tekiyo_name LIKE #{hint} OR tekiyo_name_kana LIKE #{hint} )
+		ORDER BY hintResultName
+		LIMIT 21
+	</select>
+	
+	<select id="getAccountDataListForTekiyo" resultMap="AccountDataResult" parameterType="com.busicomjp.sapp.dto.z.HintParams">
+		SELECT DISTINCT
+		    a.account_code accountCode,
+		    a.account_name accountName
+		FROM SUMMARY_M s
+		INNER JOIN ACCOUNT_M a
+		ON a.company_code = #{companyCode}
+		AND s.company_code = a.company_code
+		AND s.account_code = a.account_code
+		WHERE s.company_code = #{companyCode}
+		AND s.tekiyo_code = #{tekiyoCode}
+		AND a.use_flg = '1'
+		ORDER BY accountCode
+	</select>
+	
+	<select id="getToriHikiSakiHintDataList" resultMap="HintDataResult" parameterType="com.busicomjp.sapp.dto.z.HintParams">
+		SELECT DISTINCT
+		    torihikisaki_code hintResultCode,
+		    torihikisaki_name hintResultName    
+		FROM TORIHIKISAKI_M
+		WHERE
+			company_code = #{companyCode}
+		<![CDATA[
+		AND del_flg <> '1'
+		]]>
+		AND (UPPER(torihikisaki_name) LIKE concat('%', UPPER(#{hint}), '%') OR UPPER(torihikisaki_name_kana) LIKE concat('%', UPPER(#{hint}), '%'))
+		ORDER BY
+			hintResultName
+		LIMIT 21
+	</select>
+	
+	<select id="getAccountHintDataList" resultMap="HintDataResult" parameterType="com.busicomjp.sapp.dto.z.HintParams">
+		SELECT
+		    account_code hintResultCode,
+		    account_name hintResultName
+		FROM ACCOUNT_M
+		WHERE
+			company_code = #{companyCode}
+		AND (UPPER(account_name) LIKE concat('%', UPPER(#{hint}), '%') OR UPPER(account_name_kana) LIKE concat('%', UPPER(#{hint}), '%'))
+		AND use_flg = '1'
+		ORDER BY
+			hintResultName
+		LIMIT 21
+	</select>
+	
+	<select id="getAccountDataListForTorihikisaki" resultMap="AccountDataResult" parameterType="com.busicomjp.sapp.dto.z.HintParams">
+		SELECT DISTINCT
+		    a.account_code accountCode,
+		    a.account_name accountName
+		FROM TORIHIKISAKI_M t
+		INNER JOIN ACCOUNT_M a
+		ON a.company_code = #{companyCode}
+		AND t.company_code = a.company_code
+		AND t.account_code = a.account_code
+		WHERE t.company_code = #{companyCode}
+		AND t.torihikisaki_code = #{torihikisakiCode}
+		<![CDATA[
+		AND t.del_flg <> '1'
+		]]>
+		AND a.use_flg = '1'
+		ORDER BY accountCode
+	</select>
+	
+</mapper>

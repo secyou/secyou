@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.b.B1Repository">
+	<resultMap id="BalanceDataResult" type="com.busicomjp.sapp.model.b.BalanceData">
+    </resultMap>
+
+	<select id="getBalanceDataList" resultMap="BalanceDataResult" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+	    SELECT
+	      g.account_code accountCode,
+	      a.account_name accountName,
+	      g.debitBalance_sum debitSummany,
+	      g.creditBalance_sum creditSummany,
+	      (g.debitBalance_sum - g.creditBalance_sum) balance,
+	      a.account_kind1 accountKind1,
+	      a.account_kind1_name accountKind1Name,
+	      a.account_kind2 accountKind2,
+	      a.account_kind2_name accountKind2Name,
+	      a.account_kind3 accountKind3,
+	      a.account_kind3_name accountKind3Name,
+	      a.account_kind4 accountKind4,
+	      a.account_kind4_name accountKind4Name
+	    FROM
+		  ( SELECT
+		      account_code,
+		      SUM(debit_amount_money) debitBalance_sum,
+		      SUM(credit_amount_money) creditBalance_sum
+		    FROM GENERAL_LEDGER
+		    WHERE company_code = #{companyCode}
+		    AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		    AND counter_account != '998'
+		    GROUP BY account_code
+		  ) g
+		INNER JOIN ACCOUNT_M a
+		ON a.company_code = #{companyCode}
+		AND a.agg_flg = '1'
+	    AND g.account_code = a.account_code
+		ORDER BY accountKind1,accountKind2,accountKind3,accountKind4,accountCode
+	</select>
+
+	<select id="getBalanceDetailDataList" resultMap="BalanceDataResult" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+	    WITH carryforward_balance as (
+	        SELECT
+	          account_code accountCode,
+	          debit_amount_money debitCarryForwardBalance,
+	          credit_amount_money creditCarryForwardBalance
+	        FROM GENERAL_LEDGER
+	        WHERE company_code = #{companyCode}
+		    AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		    AND counter_account = '997'
+	    )
+	    SELECT
+	      g.account_code accountCode,
+	      a.account_name accountName,
+	      IFNULL(b.debitCarryForwardBalance, 0) debitCarryForwardBalance,
+	      IFNULL(b.creditCarryForwardBalance, 0) creditCarryForwardBalance,
+	      g.debitBalance_sum debitSummany,
+	      g.creditBalance_sum creditSummany,
+	      a.account_name accountName,
+	      a.account_kind1 accountKind1,
+	      a.account_kind1_name accountKind1Name,
+	      a.account_kind2 accountKind2,
+	      a.account_kind2_name accountKind2Name,
+	      a.account_kind3 accountKind3,
+	      a.account_kind3_name accountKind3Name,
+	      a.account_kind4 accountKind4,
+	      a.account_kind4_name accountKind4Name
+	    FROM
+		  ( SELECT
+		      account_code,
+		      SUM(debit_amount_money) debitBalance_sum,
+		      SUM(credit_amount_money) creditBalance_sum
+		    FROM GENERAL_LEDGER
+		    WHERE company_code = #{companyCode}
+		    AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		    AND counter_account != '998'
+		    GROUP BY account_code
+		  ) g
+		INNER JOIN ACCOUNT_M a
+		ON a.company_code = #{companyCode}
+		AND a.agg_flg = '1'
+	    AND g.account_code = a.account_code
+	    LEFT JOIN carryforward_balance b
+	    ON a.account_code = b.accountCode
+		ORDER BY accountKind1,accountKind2,accountKind3,accountKind4,accountCode
+	</select>
+	
+	<select id="getMaxAccrualDate" resultType="String" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+	    SELECT
+		  MAX(accrual_date) max_accrual_date
+		FROM JOURNAL_ENTRY
+		WHERE company_code = #{companyCode}
+		AND accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+	</select>
+	
+</mapper>

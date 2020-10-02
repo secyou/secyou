@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.c.C0Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+ 		<Button onMouseClicked="#onPrintData" styleClass="btn, btn-sm, btn-success" text="帳票出力(XX)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TextFlow styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+       <children>
+          <Text styleClass="text-white,strong" text="帳票出力" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+      <children>
+        <Label styleClass="strong" prefHeight="30.0" minWidth="100.0" prefWidth="100.0" text="会社名" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      	<Label fx:id="companyName" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      	
+        <Label styleClass="strong" prefHeight="30.0" text="事業年度" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<Label fx:id="fiscalYear" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      	
+        <Label styleClass="strong" prefHeight="30.0" text="出力帳票" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <CheckBox fx:id="checkboxCover" mnemonicParsing="false" text="表紙" prefWidth="200.0" prefHeight="30.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      	
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3" >
+	      <children>
+	 		<CheckBox fx:id="checkbox1" mnemonicParsing="false" text="損益計算書(P/L)" prefWidth="200.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	 		<CheckBox fx:id="checkbox2" mnemonicParsing="false" text="貸借対照表(B/S)" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+	 		<CheckBox fx:id="checkbox3" mnemonicParsing="false" text="製造原価報告書" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+	 		
+	 		<CheckBox fx:id="checkbox4" mnemonicParsing="false" text="販売費・一般管理費計算書" prefWidth="200.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	 		<CheckBox fx:id="checkbox5" mnemonicParsing="false" text="キャッシュフロー計算書" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	 		<CheckBox fx:id="checkbox6" mnemonicParsing="false" text="株主変動準備金" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+	 		
+	 		<CheckBox fx:id="checkbox7" mnemonicParsing="false" text="個別注記表" prefWidth="200.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+	 		<CheckBox fx:id="checkbox8" mnemonicParsing="false" text="資金別貸借対照表" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+	 		<CheckBox fx:id="checkbox9" mnemonicParsing="false" text="財務分析表" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+	 		
+	 		<CheckBox fx:id="checkboxReportStatement" mnemonicParsing="false" text="報告文" prefWidth="200.0" prefHeight="30.0" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+	 		<CheckBox fx:id="checkboxAuditStatement" mnemonicParsing="false" text="監査文" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

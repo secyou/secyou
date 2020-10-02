@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.e.E2RegistNextTermInfoDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="基本情報(翌年度)" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+
+        <Label prefWidth="155.0" styleClass="strong" text="会社名" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	    <Label fx:id="companyName" prefHeight="30.0" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+	    <Label styleClass="strong" text="事業タイプ" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	    <Label fx:id="businessType" prefHeight="30.0" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+	    <Label styleClass="strong" text="事業種目" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+	    <Label fx:id="businessLine" prefHeight="30.0" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+	    <Label styleClass="strong" text="決算期" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+	    <Label fx:id="settlPeriod" prefHeight="30.0" styleClass="underline" text="第X期" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+	    <Label styleClass="strong" text="事業年度期首(翌年度)" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+	    <Label fx:id="kisyu" prefHeight="30.0" styleClass="underline" text="YYYY年MM月" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+	    <Label styleClass="strong" text="期末年月(翌年度)" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+	    <Label fx:id="kimatu" prefHeight="30.0" styleClass="underline" text="YYYY年MM月" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+       <children>
+          <Text styleClass="text-white,strong" text="消費税関連(翌年度)" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+      <children>
+
+        <TextFlow minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
+          <children>
+            <Text styleClass="text-small" text="&#10;&#10;" />
+            <Text styleClass="strong" text="消費税事業区分(翌年度)" />
+            <Text styleClass="strong, text-red" text="*" />
+          </children>
+        </TextFlow>
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+	      <children>
+	 		<RadioButton fx:id="taxKbnRadio1" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="原則課税" toggleGroup="$taxKbnGroup" userData="1" GridPane.columnIndex="0" GridPane.rowIndex="0">
+			    <toggleGroup>
+			        <ToggleGroup fx:id="taxKbnGroup" />
+			    </toggleGroup>
+			</RadioButton>
+			<RadioButton fx:id="taxKbnRadio2" mnemonicParsing="false" text="簡易課税" prefWidth="80.0" toggleGroup="$taxKbnGroup" userData="2" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+			<RadioButton fx:id="taxKbnRadio3" mnemonicParsing="false" text="免税" toggleGroup="$taxKbnGroup" userData="3" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+
+	    <TextFlow minWidth="150.0" prefWidth="150.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+          <children>
+            <Text styleClass="text-small" text="&#10;&#10;" />
+            <Text styleClass="strong" text="消費税集計区分(翌年度)" />
+            <Text styleClass="strong, text-red" text="*" />
+          </children>
+        </TextFlow>
+      	<GridPane hgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.vgrow="NEVER">
+	      <children>
+	 		<RadioButton fx:id="taxSummary1" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="都度集計" GridPane.columnIndex="0" GridPane.rowIndex="0">
+			    <toggleGroup>
+			        <ToggleGroup fx:id="taxSummaryGroup" />
+			    </toggleGroup>
+			</RadioButton>
+			<RadioButton fx:id="taxSummary2" mnemonicParsing="false" text="月単位集計" prefWidth="90.0" toggleGroup="$taxSummaryGroup" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+			<RadioButton fx:id="taxSummary3" mnemonicParsing="false" text="年単位集計" toggleGroup="$taxSummaryGroup" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+                  <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    <Button onMouseClicked="#onRegistNextTerm" styleClass="btn, btn-sm, btn-success" text="登録" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS" />
+
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.d.D1Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+        <Button onMouseClicked="#onSearchData" styleClass="btn, btn-sm, btn-success" text="検索(F1)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <Button onMouseClicked="#onRegistData" styleClass="btn, btn-sm, btn-success" text="新規登録(F2)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+ 		<Button onMouseClicked="#onChangeData" styleClass="btn, btn-sm, btn-success" text="変更(F3)" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+            <ColumnConstraints />
+            <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <GridPane styleClass="gridPane-hint" hgap="5.0" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+      
+        <Label minWidth="130.0" prefWidth="130.0" styleClass="strong" text="会社名称" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="0">
+          <children>
+            <TextField fx:id="searchCompanyName" minWidth="200.0" prefWidth="200.0" />
+          </children>
+        </TextFlow>
+             
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TableView fx:id="companyDataTable" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+       <columns>
+          <TableColumn fx:id="companyName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="会社名" />
+          <TableColumn fx:id="businessTypeName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="事業タイプ" />
+          <TableColumn fx:id="businessLineName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="事業種目" />
+          <TableColumn fx:id="kimatuYear" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="期末年度" />
+          <TableColumn fx:id="fiscalYear" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="会計年度" />
+          <TableColumn fx:id="taxKindName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税事業区分" />
+          <TableColumn fx:id="taxAppName" maxWidth="-1.0" minWidth="50.0" prefWidth="50.0" sortable="false" text="消費税集計区分" />
+       </columns>
+       <columnResizePolicy>
+          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+       </columnResizePolicy>
+         <GridPane.margin>
+            <Insets bottom="0.0" />
+         </GridPane.margin>
+    </TableView>
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Balance_Sheet" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="093301cb-5a86-4534-b6dc-3e98e3fc3724">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!$F{textFieId1}.isEmpty() || !$F{textFieId4}.isEmpty()]]></conditionExpression>
+			<style isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<style name="Style4">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[!$F{textFieId5}.isEmpty() || !$F{textFieId6}.isEmpty()]]></conditionExpression>
+			<style isBold="true"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="startDay" class="java.lang.String"/>
+	<parameter name="endDay" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="textFieId1" class="java.lang.String"/>
+	<field name="textFieId2" class="java.lang.String"/>
+	<field name="textFieId3" class="java.lang.String"/>
+	<field name="textFieId4" class="java.lang.String"/>
+	<field name="textFieId5" class="java.lang.String"/>
+	<field name="textFieId6" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="158" y="1" width="240" height="30" uuid="85789f73-a801-420e-acc1-03397b811505">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[製　造　原　価]]></text>
+			</staticText>
+			<line>
+				<reportElement x="148" y="33" width="264" height="1" uuid="4f27a78a-c5a5-4cf6-af71-6b92b4c067ff"/>
+			</line>
+			<line>
+				<reportElement x="148" y="37" width="264" height="1" uuid="b10b6470-2bfe-467f-aac9-48c083aa0ae6"/>
+			</line>
+			<textField>
+				<reportElement x="211" y="40" width="120" height="30" uuid="5097f390-915b-4ece-84a1-d20571a07b25">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["自 " + $P{startDay}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="490" y="48" width="82" height="30" uuid="10ea1eb5-a531-42af-88db-f58c8632c8a2"/>
+				<textElement textAlignment="Left" verticalAlignment="Bottom">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<text><![CDATA[(単位：円)]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="211" y="55" width="120" height="15" uuid="ec51e8d5-1829-41d9-bf05-0f55c618d5cd">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement>
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["至 " + $P{endDay}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="175" height="20" backcolor="#FFFFFF" uuid="8d98a81f-dbd0-4d82-a47b-904c85be64e5">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<text><![CDATA[科                        目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="278" y="0" width="175" height="20" backcolor="#FFFFFF" uuid="49c2fbe3-042e-4c3f-9bf6-bc802d00085a">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<text><![CDATA[科                        目]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="176" y="0" width="100" height="20" backcolor="#FFFFFF" uuid="7528985b-8638-4723-9952-99fc2b497234">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<text><![CDATA[金            額]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="454" y="0" width="100" height="20" backcolor="#FFFFFF" uuid="320dc9b4-d5f3-4c3a-981a-aca722371188">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<text><![CDATA[金            額]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="25" uuid="87caeea4-bf68-4855-b35f-7b27a9c2339f"/>
+			</line>
+			<line>
+				<reportElement x="175" y="0" width="1" height="25" uuid="661e8342-f1a8-4f2b-a963-0fab5d04b72c"/>
+			</line>
+			<line>
+				<reportElement x="276" y="0" width="1" height="25" uuid="e6c49193-a483-4611-94cb-36d4972f4bb7"/>
+			</line>
+			<line>
+				<reportElement x="278" y="0" width="1" height="25" uuid="74eef662-4efc-4564-a49b-e069656e9782"/>
+			</line>
+			<line>
+				<reportElement x="453" y="0" width="1" height="25" uuid="309d0b00-f684-47ef-a53d-1d2d59ada2f7"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="25" uuid="045ef071-8f20-47a8-b452-f1f5a998cf6e"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement style="Style1" x="18" y="0" width="100" height="16" uuid="96841bd8-4ec3-4b45-a0dc-eec78b91e88e"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="0" width="125" height="16" uuid="57d5db2e-06db-46b8-9686-ee96f495cb96">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId2}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Style1" x="169" y="0" width="100" height="16" uuid="1f457633-320c-4a56-a479-be57b4750ba5"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId3}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="0" width="100" height="16" uuid="5b493791-4ac5-41bb-af31-bf211609ca26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId4}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="314" y="0" width="125" height="16" uuid="eddbfc8a-e1d0-48ac-b07e-db6350d0edc8">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId5}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement style="Style1" x="447" y="0" width="100" height="16" uuid="85868367-6058-416e-bf70-7635b8455f15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="IPAexg" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{textFieId6}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="0" width="1" height="18" uuid="e42a2643-3a80-4b72-9a2a-1e6cbb1cb625"/>
+			</line>
+			<line>
+				<reportElement x="175" y="0" width="1" height="18" uuid="620900a0-2890-4350-b9b9-2d7ae07ad991"/>
+			</line>
+			<line>
+				<reportElement x="276" y="0" width="1" height="18" uuid="ce61459c-cf5c-4c65-8dd6-9edd3c4e8f2c"/>
+			</line>
+			<line>
+				<reportElement x="278" y="0" width="1" height="18" uuid="3c410a2c-c12d-4b15-9e51-63feae4d4925"/>
+			</line>
+			<line>
+				<reportElement x="453" y="0" width="1" height="18" uuid="47a38f37-1e72-4311-b043-f7b8c4edf0b6"/>
+			</line>
+			<line>
+				<reportElement x="554" y="0" width="1" height="18" uuid="197ca416-28dc-476e-b5f8-ef09a535777c"/>
+			</line>
+			<line>
+				<reportElement x="0" y="17" width="175" height="1" uuid="fd4d71f9-1c8b-4c06-b594-d6f34096375f">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計")]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="176" y="17" width="100" height="1" uuid="03e06fb0-f9b0-4742-97d9-b3ce10f09982">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計") || !$F{textFieId1}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="278" y="17" width="175" height="1" uuid="a5e12772-9c70-4591-9d79-7b15a34f20b8">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計")]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="454" y="17" width="100" height="1" uuid="94b8cdc6-227c-4921-b18e-ca8a78a34420">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計") || !$F{textFieId4}.isEmpty()]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="278" y="0" width="175" height="1" uuid="dd7fb789-4b53-4c62-bd28-78a14eb73b62">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計")]]></printWhenExpression>
+				</reportElement>
+			</line>
+			<line>
+				<reportElement x="454" y="0" width="100" height="1" uuid="12321e08-bff8-4379-b8e4-6e36357b4d63">
+					<printWhenExpression><![CDATA[$F{textFieId4}.equals("合計")]]></printWhenExpression>
+				</reportElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

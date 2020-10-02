@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.d.D1Repository">
+	<resultMap id="CompanyDataResult" type="com.busicomjp.sapp.model.d.CompanyData">
+    </resultMap>
+
+	<select id="getCompanyDataList" resultMap="CompanyDataResult" parameterType="String">
+		SELECT
+		    company_code companyCode,
+			business_type businessType,
+			company_name companyName,
+			company_name_kana companyNameKana,
+			street_address streetAddress,
+			corp_number corpNumber,
+			business_line businessLine,
+			bule_dec buleDec,
+			est_date estDate,
+			settl_period settlPeriod,
+			kisyu_month kisyuYearMonth,
+			kimatu_month kimatuYearMonth,
+			kimatu_year kimatuYear,
+			kimatu_month_day kimatuMonthDay,
+			Input_start_month inputStartMonth,
+			tel_number telNumber,
+			fax_number faxNumber,
+			mail_address mailAddress,
+			director_name directorName,
+			tax_kind_flg taxKindFlg,
+			tax_app_flg taxAppFlg,
+			short_flg shortFlg,
+			del_flg delFlg
+		FROM COMPANY_M
+		ORDER BY company_code ASC, kimatu_year DESC, kimatu_month_day DESC
+	</select>
+	<select id="findCompanyDataList" resultMap="CompanyDataResult" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		SELECT
+			company_code companyCode,
+			business_type businessType,
+			company_name companyName,
+			company_name_kana companyNameKana,
+			street_address streetAddress,
+			corp_number corpNumber,
+			business_line businessLine,
+			bule_dec buleDec,
+			est_date estDate,
+			settl_period settlPeriod,
+			kisyu_month kisyuYearMonth,
+			kimatu_month kimatuYearMonth,
+			kimatu_year kimatuYear,
+			kimatu_month_day kimatuMonthDay,
+			Input_start_month inputStartYearMonth,
+			tel_number telNumber,
+			fax_number faxNumber,
+			mail_address mailAddress,
+			director_name directorName,
+			tax_kind_flg taxKindFlg,
+			tax_app_flg taxAppFlg,
+			short_flg shortFlg,
+			del_flg delFlg
+		FROM COMPANY_M
+		WHERE 1 = 1
+        <if test="companyName != null">				
+	       AND company_name LIKE CONCAT('%', #{companyName}, '%')			
+        </if>				       
+		<if test="companyNameKana != null">
+			AND company_name_kana LIKE CONCAT('%', #{companyNameKana}, '%')
+		</if>
+		<if test="kimatuYear != null">
+			AND kimatu_year = #{kimatuYear}
+		</if>
+		<if test="companyCode != null">
+			AND company_code = #{companyCode}
+		</if>
+		ORDER BY company_code ASC, kimatu_year ASC
+	</select>
+	<insert id="insertCompanyData" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		insert into COMPANY_M
+			(company_code,
+			business_type,
+			company_name,
+			company_name_kana,
+			street_address,
+			corp_number,
+			business_line,
+			bule_dec,
+			est_date,
+			settl_period,
+			kisyu_month,
+			kimatu_month,
+			kimatu_year,
+			kimatu_month_day,
+			Input_start_month,
+			tel_number,
+			fax_number,
+			mail_address,
+			director_name,
+			tax_kind_flg,
+			tax_app_flg,
+			short_flg,
+			first_flg,
+			del_flg,
+			reg_date,
+			upd_date)
+		values (
+			#{companyCode},
+			#{businessType},
+			#{companyName},
+			#{companyNameKana},
+			#{streetAddress},
+			#{corpNumber},
+			#{businessLine},
+			#{buleDec},
+			#{estDate},
+			#{settlPeriod},
+			#{kisyuYearMonth},
+			#{kimatuYearMonth},
+			#{kimatuYear},
+			#{kimatuMonthDay},
+			#{inputStartYearMonth},
+			#{telNumber},
+			#{faxNumber},
+			#{mailAddress},
+			#{directorName},
+			#{taxKindFlg},
+			#{taxAppFlg},
+			'1',
+			#{shortFlg},
+			#{delFlg},
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	<update id="updateAllCompany" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		update COMPANY_M
+		set
+			est_date = #{estDate},
+			Input_start_month = #{inputStartYearMonth},
+			upd_date = current_timestamp
+		where company_code = #{companyCode}
+	</update>
+	<update id="updateCurrentCompany" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		update COMPANY_M
+		set
+			settl_period = #{settlPeriod},
+			kisyu_month = #{kisyuYearMonth},
+			kimatu_month = #{kimatuYearMonth},
+			tax_kind_flg = #{taxKindFlg},
+			tax_app_flg = #{taxAppFlg},
+			short_flg = #{shortFlg},
+			upd_date = current_timestamp
+		where company_code = #{companyCode}
+		and kimatu_year = #{kimatuYear}
+	</update>
+	<update id="updateAfterCurrentCompany" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		update COMPANY_M
+		set
+			business_type = #{businessType},
+			company_name = #{companyName},
+			company_name_kana = #{companyNameKana},
+			street_address = #{streetAddress},
+			corp_number = #{corpNumber},
+			business_line = #{businessLine},
+			bule_dec = #{buleDec},
+			tel_number = #{telNumber},
+			fax_number = #{faxNumber},
+			mail_address = #{mailAddress},
+			director_name = #{directorName},
+			upd_date = current_timestamp
+		where company_code = #{companyCode}
+		and kimatu_year <![CDATA[ >= ]]> #{kimatuYear}
+	</update>
+	<select id="getCarryforwardJournalEntryCount" resultType="Integer" parameterType="com.busicomjp.sapp.dto.b.CompanyDto">
+		SELECT
+			count(*)
+		FROM JOURNAL_ENTRY
+		WHERE accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		AND debit_account <![CDATA[ <> ]]> '997'
+		AND credit_account <![CDATA[ <> ]]> '997'
+		AND company_code = #{companyCode}
+	</select>
+	<select id="getRegistNextYearData" resultType="Integer" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
+		SELECT
+			count(*)
+		FROM COMPANY_M
+		WHERE company_code = #{companyCode}
+		AND kimatu_year = #{kimatuYear}
+	</select>
+	<select id="getMaxCompanyCode" resultType="String">
+		SELECT IFNULL(MAX(company_code),0)
+		FROM COMPANY_M
+	</select>
+	<insert id="insertSummaryData" parameterType="String">
+		insert into SUMMARY_M
+			(company_code,
+			tekiyo_code,
+			account_kind,
+			tekiyo_name,
+			tekiyo_name_kana,
+			account_code,
+			del_flg,
+			reg_date,
+			upd_date)
+			(select
+			#{companyCode},
+			tekiyo_code,
+			account_kind,
+			tekiyo_name,
+			tekiyo_name_kana,
+			account_code,
+			del_flg,
+			current_timestamp,
+			current_timestamp
+		from
+			SUMMARY_M
+		where company_code = '00000')
+	</insert>
+	<insert id="insertAccountData" parameterType="String">
+		insert into ACCOUNT_M
+			(company_code,
+			account_kind1,
+			account_kind1_name,
+			account_kind2,
+			account_kind2_name,
+			account_kind3,
+			account_kind3_name,
+			account_kind4,
+			account_kind4_name,
+			account_code,
+			account_name,
+			account_name_kana,
+			kind_flg,
+			agg_flg,
+			use_flg,
+			del_flg,
+			reg_date,
+			upd_date)
+			(select
+			#{companyCode},
+			account_kind1,
+			account_kind1_name,
+			account_kind2,
+			account_kind2_name,
+			account_kind3,
+			account_kind3_name,
+			account_kind4,
+			account_kind4_name,
+			account_code,
+			account_name,
+			account_name_kana,
+			kind_flg,
+			agg_flg,
+			use_flg,
+			del_flg,
+			current_timestamp,
+			current_timestamp
+		from
+			ACCOUNT_M
+		where company_code = '00000')
+	</insert>
+
+</mapper>

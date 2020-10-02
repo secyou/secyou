@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.CompanyManageController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="終了">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#onMenuExit" text="終了" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <GridPane styleClass="page" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+          <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </padding>
+          <children>
+            <TabPane fx:id="appTab" styleClass="tab-pane-app" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+               <tabs>
+               
+   		        <Tab closable="false" styleClass="tab-app" text="会社情報管理">
+   		            <content>
+   		                <fx:include fx:id="d1" source="d/d1_maintenanceCompany.fxml" />
+   		            </content>
+   		        </Tab>
+
+               </tabs>
+			</TabPane>
+          </children>
+          <columnConstraints>
+            <ColumnConstraints />
+                  <ColumnConstraints />
+          </columnConstraints>
+          <rowConstraints>
+            <RowConstraints />
+          </rowConstraints>
+        </GridPane>
+      </children>
+      <VBox.margin>
+        <Insets />
+      </VBox.margin>
+    </AnchorPane>
+  </children>
+  <stylesheets>
+    <URL value="@../css/styles.css" />
+  </stylesheets>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.b.B2Repository">
+	<resultMap id="AccountDataResult" type="com.busicomjp.sapp.model.b.AccountInfoData"></resultMap>
+	<resultMap id="GeneralLedgerDataResult" type="com.busicomjp.sapp.model.b.GeneralLedgerData"></resultMap>
+	<select id="getAccountList" resultMap="AccountDataResult" parameterType="String">
+		SELECT 	a.account_code AS accountCode, a.account_name AS accountName
+ 		FROM  	ACCOUNT_M a,
+  				(SELECT DISTINCT account_code, company_code
+  				 FROM GENERAL_LEDGER
+  				 WHERE company_code = #{companyCd}
+  				 AND accrual_date BETWEEN #{sta_date} AND #{end_date} ) b
+ 		WHERE  	a.account_code = b.account_code
+ 		AND 	a.company_code = #{companyCd}
+ 		AND     a.agg_flg      = '1'
+ 		ORDER BY a.account_kind1, account_kind2, account_kind3, account_kind4, a.account_code
+	</select>
+	
+	<select id="getGeneralLedger" resultMap="GeneralLedgerDataResult" parameterType="String">
+		SELECT 	b.account_name AS counterAccount,
+				a.general_no AS generalNo,
+				c.tekiyo_name AS tekiyo,
+				concat(substr(a.accrual_date, 1, 4), '/', substr(a.accrual_date, 5, 2), '/', substr(a.accrual_date, 7, 2)) AS accrualDate,
+				FORMAT(a.credit_amount_money,0) AS creditAmountMoney,
+				FORMAT(a.debit_amount_money,0) AS debitAmountMoney,
+				CASE 
+				  WHEN am.kind_flg = '1' THEN FORMAT(a.balance_money,0)
+				  ELSE FORMAT(a.balance_money*-1,0)
+				END AS balanceMoney,
+				a.accrual_date AS sortKey
+		FROM  	GENERAL_LEDGER a
+		INNER JOIN ACCOUNT_M am
+		ON a.account_code = am.account_code
+		INNER JOIN ACCOUNT_M b
+		ON a.counter_account = b.account_code
+		LEFT JOIN SUMMARY_M c
+		ON a.tekiyo_code = c.tekiyo_code
+		AND 	c.company_code = #{companyCd}
+		WHERE  	a.account_code = #{account_code}
+		AND 	a.accrual_date BETWEEN #{sta_date} AND #{end_date}
+		AND 	a.company_code = #{companyCd}
+		AND 	b.company_code = #{companyCd}
+		AND 	am.company_code = #{companyCd}
+		UNION
+		SELECT 	'' AS counterAccount,
+				'' AS generalNo,
+				'' AS tekiyo,
+				'' AS accrualDate,
+				'' AS creditAmountMoney,
+				'' AS debitAmountMoney,
+				'' AS balanceMoney,
+				CONCAT (left(accrual_date,6), '99') as sortKey
+		FROM  	GENERAL_LEDGER a
+		WHERE  	a.account_code = #{account_code}
+		AND 	a.accrual_date BETWEEN #{sta_date} AND #{end_date}
+		AND 	a.company_code = #{companyCd}
+		GROUP BY a.company_code, a.account_code,counterAccount, sortKey
+		UNION
+		SELECT 	CONCAT ('※※　',SUBSTRING(accrual_date,5,2), '月計　※※') AS counterAccount,
+				'' AS generalNo,
+				'' AS tekiyo,
+				'' AS accrualDate,
+				FORMAT(sum(a.credit_amount_money),0) AS creditAmountMoney,
+				FORMAT(sum(a.debit_amount_money),0) AS debitAmountMoney,
+				CASE 
+				  WHEN am.kind_flg = '1' THEN FORMAT(sum(a.debit_amount_money) - sum(a.credit_amount_money),0)
+				  ELSE FORMAT(sum(a.credit_amount_money) - sum(a.debit_amount_money),0)
+				END AS balanceMoney,
+				CONCAT (left(accrual_date,6), '98') as sortKey
+		FROM  	GENERAL_LEDGER a
+		INNER JOIN ACCOUNT_M am
+		ON a.account_code = am.account_code
+		WHERE  	a.account_code = #{account_code}
+		AND 	a.accrual_date BETWEEN #{sta_date} AND #{end_date}
+		AND 	a.company_code = #{companyCd}
+		AND     am.company_code = #{companyCd}
+		GROUP BY a.company_code, a.account_code,counterAccount, sortKey
+		UNION
+		SELECT 	CONCAT ('※※　', '年合計　※※')  AS counterAccount,
+				'' AS generalNo,
+				'' AS tekiyo,
+				'' AS accrualDate,
+				FORMAT(sum(a.credit_amount_money),0) AS creditAmountMoney,
+				FORMAT(sum(a.debit_amount_money),0) AS debitAmountMoney,
+				CASE 
+				  WHEN am.kind_flg = '1' THEN FORMAT(sum(a.debit_amount_money) - sum(a.credit_amount_money),0)
+				  ELSE FORMAT(sum(a.credit_amount_money) - sum(a.debit_amount_money),0)
+				END AS balanceMoney,
+				'9999' AS sortKey
+		FROM  	GENERAL_LEDGER a
+		INNER JOIN ACCOUNT_M am
+		ON a.account_code = am.account_code
+		WHERE  	a.account_code = #{account_code}
+		AND 	a.accrual_date BETWEEN #{sta_date} AND #{end_date}
+		AND 	a.company_code = #{companyCd}
+		AND     am.company_code = #{companyCd}
+		GROUP BY a.company_code, a.account_code,counterAccount, sortKey
+		ORDER BY sortKey
+	</select>
+</mapper>

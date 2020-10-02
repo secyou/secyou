@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.e.E2Repository">
+	<resultMap id="CompanyDataResult" type="com.busicomjp.sapp.dto.d.CompanyMDto">
+    </resultMap>
+    <resultMap id="ComboItemResult" type="com.busicomjp.sapp.common.item.ComboItem">
+    </resultMap>
+    <resultMap id="CarryForwardData" type="com.busicomjp.sapp.model.e.CarryForwardData">
+    </resultMap>
+	<select id="getCompanyData" resultMap="CompanyDataResult" parameterType="String">
+		SELECT
+		    company_code companyCode,
+			business_type businessType,
+			company_name companyName,
+			company_name_kana companyNameKana,
+			street_address streetAddress,
+			corp_number corpNumber,
+			business_line businessLine,
+			bule_dec buleDec,
+			est_date estDate,
+			settl_period settlPeriod,
+			kisyu_month kisyuYearMonth,
+			kimatu_month kimatuYearMonth,
+			kimatu_year kimatuYear,
+			kimatu_month_day kimatuMonthDay,
+			Input_start_month inputStartYearMonth,
+			tel_number telNumber,
+			fax_number faxNumber,
+			mail_address mailAddress,
+			director_name directorName,
+			tax_kind_flg taxKindFlg,
+			tax_app_flg taxAppFlg,
+			short_flg shortFlg,
+			del_flg delFlg
+		FROM COMPANY_M
+		where company_code = #{companyCode}
+		and kimatu_year <![CDATA[ >= ]]> #{kimatuYear}
+	</select>
+	<select id="getAccountKind1DataList" resultMap="ComboItemResult" parameterType="String">
+
+		    select DISTINCT account_kind1 as code,account_kind1_name as name
+		    from ACCOUNT_M
+		    where account_kind1 in ('1','2','3')
+		    and company_code = #{companyCode}
+		    and use_flg = '1'
+	</select>
+	<select id="getAccountCodeDataList" resultMap="CarryForwardData" parameterType="com.busicomjp.sapp.dto.e.InputDataDto">
+				select a.account_code as accountCode
+		    	  ,a.account_name as accountName
+		     	  ,ifnull(b.debit_amount_money,0) as debitAmountMoney
+		     	  ,ifnull(b.credit_amount_money,0) as creditAmountMoney
+		     	  ,a.account_kind1 as accountKind1
+		     	  ,a.account_kind2 as accountKind2
+		     	  ,a.account_kind3 as accountKind3
+		     	  ,a.account_kind4 as accountKind4
+		     	  ,a.account_kind1_name as accountKind1Name
+		     	  ,a.account_kind2_name as accountKind2Name
+		     	  ,a.account_kind3_name as accountKind3Name
+		     	  ,a.account_kind4_name as accountKind4Name
+		     	  ,a.kind_flg as kindFlg
+		     	  ,CASE a.kind_flg
+		     	     WHEN '1' THEN '借'
+		     	     WHEN '2' THEN '貸'
+		     	     ELSE ''
+		     	  END kindName
+		    from ACCOUNT_M a
+		    left join (select
+		    					sum(debit_amount_money) debit_amount_money,
+		    					sum(credit_amount_money) credit_amount_money,
+		    					account_code,
+		    					company_code,
+		    					counter_account
+		    			from 	GENERAL_LEDGER
+		    			where 	counter_account = '997'
+		    			and		accrual_date  BETWEEN #{startDate} AND #{endDate}
+		    			and		company_code = #{companyCode}
+		    			group by company_code, account_code,counter_account) b
+			on a.account_code = b.account_code
+			and a.company_code = b.company_code
+			where a.company_code = #{companyCode}
+			and a.account_kind1 in ('1','2','3')
+			and a.use_flg = '1'
+	</select>
+</mapper>

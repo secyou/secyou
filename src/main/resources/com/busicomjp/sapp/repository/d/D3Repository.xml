@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.d.D3Repository">
+	<resultMap id="AccountMainResult" type="com.busicomjp.sapp.model.d.AccountMaintData">
+    </resultMap>
+
+	<select id="selectAccountMainData" resultMap="AccountMainResult" parameterType="String">
+		SELECT
+			account_kind1 accountKind1,
+			account_kind1_name accountKind1Name,
+			account_kind2 accountKind2,
+			account_kind2_name accountKind2Name,
+			account_kind3 accountKind3,
+			account_kind3_name accountKind3Name,
+			account_kind4 accountKind4,
+			account_kind4_name accountKind4Name,
+			account_name accountName,
+			account_name_kana accountNameKana,
+			account_code accountCode,
+			kind_flg kindFlg,
+			agg_flg aggFlg,
+			use_flg useFlg,
+			del_flg delFlg
+		FROM ACCOUNT_M
+		WHERE company_code = #{companyCode}
+		      AND del_flg = '0'
+		      AND agg_flg = '1'
+			  <if test="searchKindName != null">
+			      AND (account_kind1_name LIKE CONCAT('%', #{searchKindName}, '%') OR
+			           account_kind2_name LIKE CONCAT('%', #{searchKindName}, '%') OR
+			           account_kind3_name LIKE CONCAT('%', #{searchKindName}, '%') OR
+			           account_kind4_name LIKE CONCAT('%', #{searchKindName}, '%'))
+			  </if>
+			  <if test="searchAccountName != null">
+			      AND account_name LIKE CONCAT('%', #{searchAccountName}, '%')
+			  </if>
+			  <if test="searchAccountNameKana != null">
+			      AND account_name_kana LIKE CONCAT('%', #{searchAccountNameKana}, '%')
+			  </if>
+		ORDER BY account_kind1, account_kind2,account_kind3,account_kind4,account_code
+	</select>
+	
+	<select id="getKindKbn" resultType="String">
+		SELECT 
+			 kind_flg
+		FROM
+			ACCOUNT_M
+		WHERE
+			company_code = #{companyCode} AND
+			account_kind1 = #{selectCode} AND
+			account_kind2 = #{selectCode2} AND
+			account_kind3 = #{selectCode3} AND
+			account_kind4 = #{selectCode4}
+		limit 1
+	</select>
+	
+	<select id="getMaxAccountCd" resultType="String">
+		SELECT 
+			max(account_code)
+		FROM 
+			ACCOUNT_M
+		WHERE 
+			company_code = #{companyCode}
+	</select>
+	
+	<select id="getMaxSummaryCd" resultType="String">
+		SELECT 
+			max(tekiyo_code)
+		FROM 
+			SUMMARY_M
+		WHERE 
+			company_code = #{companyCode}
+	</select>
+	
+	<insert id="insertAccountM" parameterType="String">
+		insert into ACCOUNT_M
+			(company_code,
+			account_kind1,
+			account_kind1_name,
+			account_kind2,
+			account_kind2_name,
+			account_kind3,
+			account_kind3_name,
+			account_kind4,
+			account_kind4_name,
+			account_code,
+			account_name,
+			account_name_kana,
+			kind_flg,
+			agg_flg,
+			use_flg,
+			del_flg,
+			reg_date,
+			upd_date)
+		values (
+			#{companyCode},
+            #{accountKind1},
+            #{accountKind1Name},
+			#{accountKind2},
+			#{accountKind2_name},
+			#{accountKind3},
+			#{accountKind3_name},
+			#{accountKind4},
+			#{accountKind4_name},
+			#{accountCode},
+			#{accountName},
+			#{accountNameKana},
+			#{kindFlg},
+			1,
+			1,
+			0,
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<insert id="insertSummaryM" parameterType="String">
+		insert into SUMMARY_M
+			(company_code,
+			tekiyo_code,
+			tekiyo_name,
+			tekiyo_name_kana,
+			account_kind,
+			account_code,
+			del_flg,
+			reg_date,
+			upd_date)
+		values (
+			#{companyCode},
+            #{tekiyoCd},
+			#{accountName},
+			#{accountNameKana},
+			0,
+			#{accountCd},
+			0,
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<update id="updateAccountM" parameterType="String">
+		UPDATE 
+			ACCOUNT_M
+		SET
+			account_name = #{accountName},
+			account_name_kana = #{accountNameKana},
+			use_flg = #{useKbn}, 
+			upd_date = current_timestamp
+        WHERE
+			company_code = #{companyCode} AND
+            account_code = #{accounCode}
+	</update>
+</mapper>

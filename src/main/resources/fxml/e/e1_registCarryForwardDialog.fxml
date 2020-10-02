@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.e.E1RegistCarryForwardDialogController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="前期繰越登録" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+
+        <GridPane styleClass="bottom-border" vgap="5.0" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+	      <children>
+	        <Label prefWidth="155.0" styleClass="strong" text="勘定科目 : " GridPane.columnIndex="0" GridPane.rowIndex="0" />
+	        <Label fx:id="accountName" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+	        <Label styleClass="strong" text="分類 : " GridPane.columnIndex="0" GridPane.rowIndex="1" />
+	        <Label fx:id="accountKind" prefWidth="500.0" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	        <RowConstraints />
+	            <RowConstraints />
+	            <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="10.0" left="0.0" right="0.0" top="10.0" />
+	      </GridPane.margin>
+	    </GridPane>
+
+      	<Label minWidth="150.0" prefWidth="150.0" styleClass="strong" text="借方金額" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="1">
+          <children>
+            <TextField fx:id="newDebitAmountMoney" onMouseClicked="#onCreditCheck" minWidth="200.0" prefWidth="200.0" text="0" />
+          </children>
+        </TextFlow>
+
+	    <Label minWidth="150.0" prefWidth="150.0"  styleClass="strong" text="貸方金額" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      	<TextFlow GridPane.columnIndex="1" GridPane.rowIndex="2">
+          <children>
+            <TextField fx:id="newCreditAmountMoney" onMouseClicked="#onDebitCheck" minWidth="200.0" prefWidth="200.0" text="0" />
+          </children>
+        </TextFlow>
+
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    <Button onMouseClicked="#onRegistCarryForward" styleClass="btn, btn-sm, btn-success" text="登録" GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

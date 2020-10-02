@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane styleClass="gridPane-app" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.f.F2FinishController">
+  <padding>
+    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+  </padding>
+  <children>
+
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+       <children>
+          <Text styleClass="text-white,strong" text="会社新規登録完了" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+        <Label styleClass="strong" text="以下の会社情報登録が完了しました。" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
+        
+        <Label minWidth="100.0" prefHeight="30.0" prefWidth="150.0" text="会社(個人事業主)名" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+      	<Label fx:id="companyName" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      	
+      	<Label minWidth="100.0" prefHeight="30.0" prefWidth="150.0" text="決算期" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+      	<Label fx:id="settlPeriod" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      	
+      	<Label minWidth="100.0" prefHeight="30.0" prefWidth="150.0" text="事業年度" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+      	<Label fx:id="fiscalYear" styleClass="underline" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      	
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TextFlow prefWidth="710.0" styleClass="textflow-head" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+       <children>
+          <Text styleClass="text-white,strong" text="継続処理へ" />
+       </children>
+       <GridPane.margin>
+          <Insets top="0.0" />
+       </GridPane.margin>
+    </TextFlow>
+    <GridPane hgap="5.0" styleClass="gridPane-body" vgap="5.0" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+      <children>
+	    <Label styleClass="strong" text="以下の処理ボタンをクリックして、継続の処理を進めてください。" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+	    <TextFlow GridPane.columnIndex="0" GridPane.rowIndex="1">
+           <children>
+              <Label text="取引先登録・勘定科目編集・摘要編集を行う場合は、" />
+              <Button onMouseClicked="#onMainteData" styleClass="btn, btn-sm, btn-success" text="各種設定" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+              <Label text="をクリックしてください。" />
+           </children>
+       </TextFlow>
+	   <TextFlow GridPane.columnIndex="0" GridPane.rowIndex="2">
+           <children>
+               <Label text="初回繰越登録を行う場合は、" />
+               <Button onMouseClicked="#onCarryForward" styleClass="btn, btn-sm, btn-success" text="初回繰越登録" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <Label text="をクリックしてください。" />
+           </children>
+       </TextFlow>
+       <TextFlow GridPane.columnIndex="0" GridPane.rowIndex="3">
+           <children>
+               <Label text="仕訳登録を行う場合は、" />
+               <Button onMouseClicked="#onRegistShiwake" styleClass="btn, btn-sm, btn-success" text="仕訳登録" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <Label text="をクリックしてください。" />
+           </children>
+       </TextFlow>
+       <TextFlow GridPane.columnIndex="0" GridPane.rowIndex="4">
+           <children>
+               <Label text="登録処理を完了したい場合は、" />
+               <Button onMouseClicked="#onFinish" styleClass="btn, btn-sm, btn-success" text="完了" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+               <Label text="をクリックしてください。" />
+           </children>
+       </TextFlow>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="10.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+      <RowConstraints />
+  </rowConstraints>
+  <stylesheets>
+    <URL value="@../../css/styles.css" />
+  </stylesheets>
+  <opaqueInsets>
+    <Insets />
+  </opaqueInsets>
+</GridPane>

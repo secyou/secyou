@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.b.B4Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+ 		<Button fx:id="printPdfBtn" onMouseClicked="#onPrintData" styleClass="btn, btn-sm, btn-success" text="帳票出力(F9)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TableView fx:id="receivableDataTable" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	  <columns>
+	    <TableColumn fx:id="torihikisakiAndDate" maxWidth="-1.0" minWidth="100.0" prefWidth="-1.0" sortable="false" text="取引先(最終取引日)" />
+	    <TableColumn fx:id="carryForwardAmountMoney" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="前期繰越" style="-fx-alignment: center-right;" />
+	    <TableColumn fx:id="month1" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="YYYY/MM">
+	        <columns>
+                <TableColumn fx:id="depPay1" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="request1" minWidth="50.0" prefWidth="-1.0" sortable="false" text="請求" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="balance1" minWidth="50.0" prefWidth="-1.0" sortable="false" text="残高" style="-fx-alignment: center-right;" />
+            </columns>
+        </TableColumn>
+        <TableColumn fx:id="month2" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="YYYY/MM">
+	        <columns>
+                <TableColumn fx:id="depPay2" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="request2" minWidth="50.0" prefWidth="-1.0" sortable="false" text="請求" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="balance2" minWidth="50.0" prefWidth="-1.0" sortable="false" text="残高" style="-fx-alignment: center-right;" />
+            </columns>
+        </TableColumn>
+        <TableColumn fx:id="month3" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="YYYY/MM">
+	        <columns>
+                <TableColumn fx:id="depPay3" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="request3" minWidth="50.0" prefWidth="-1.0" sortable="false" text="請求" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="balance3" minWidth="50.0" prefWidth="-1.0" sortable="false" text="残高" style="-fx-alignment: center-right;" />
+            </columns>
+        </TableColumn>
+        <TableColumn fx:id="month4" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="YYYY/MM">
+	        <columns>
+                <TableColumn fx:id="depPay4" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="request4" minWidth="50.0" prefWidth="-1.0" sortable="false" text="請求" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="balance4" minWidth="50.0" prefWidth="-1.0" sortable="false" text="残高" style="-fx-alignment: center-right;" />
+            </columns>
+        </TableColumn>
+        <TableColumn fx:id="month5" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="YYYY/MM">
+	        <columns>
+                <TableColumn fx:id="depPay5" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="request5" minWidth="50.0" prefWidth="-1.0" sortable="false" text="請求" style="-fx-alignment: center-right;" />
+                <TableColumn fx:id="balance5" minWidth="50.0" prefWidth="-1.0" sortable="false" text="残高" style="-fx-alignment: center-right;" />
+            </columns>
+        </TableColumn>
+	  </columns>
+		<columnResizePolicy>
+	        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+	    </columnResizePolicy>
+	    <GridPane.margin>
+            <Insets bottom="5.0" />
+         </GridPane.margin>
+    </TableView>
+    
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.vgrow="NEVER">
+      <children>
+ 		<Button fx:id="firstDataBtn" onMouseClicked="#onFirstData" styleClass="btn, btn-sm-page, btn-success" text="|＜" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+ 		<Button fx:id="prevDataBtn" onMouseClicked="#onPrevData" styleClass="btn, btn-sm-page, btn-success" text="＜" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+ 		<Button fx:id="nextDataBtn" onMouseClicked="#onNextData" styleClass="btn, btn-sm-page, btn-success" text="＞" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+ 		<Button fx:id="lastDataBtn" onMouseClicked="#onLastData" styleClass="btn, btn-sm-page, btn-success" text="＞|" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints hgrow="ALWAYS" />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

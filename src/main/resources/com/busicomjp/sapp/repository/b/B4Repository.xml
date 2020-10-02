@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.b.B4Repository">
+	<resultMap id="accountsSummaryData" type="com.busicomjp.sapp.model.b.AccountsSummaryData"></resultMap>
+	<resultMap id="mapResult" type="java.util.HashMap">
+        <result property="suppliersCode" column="suppliersCode"/>
+        <result property="amountMoney" column="amountMoney" />
+    </resultMap>
+	<select id="selectCarryForwardMoney" parameterType="String" resultMap="mapResult">
+		SELECT
+			je.suppliers_code AS suppliersCode
+			,je.amount_money AS amountMoney
+		FROM
+			JOURNAL_ENTRY je
+			INNER JOIN (
+			SELECT
+			    je.company_code
+			    ,je.suppliers_code
+			    ,MAX(je.journal_no) AS journal_no
+			FROM
+				JOURNAL_ENTRY je
+			WHERE
+			    je.company_code = #{companyCode}
+			    AND je.suppliers_code IS NOT NULL
+			    AND concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth}
+			    AND je.debit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+			    AND je.credit_account = #{accountCodeCarryforward}
+			GROUP BY
+				je.company_code ,je.suppliers_code
+			) new_je ON
+			je.company_code = new_je.company_code
+			AND je.journal_no = new_je.journal_no
+			AND je.suppliers_code = new_je.suppliers_code
+		WHERE
+			je.company_code = #{companyCode}
+			AND je.suppliers_code IS NOT NULL
+	</select>
+	<select id="selectLastTradingDate" parameterType="String" resultMap="mapResult">
+		SELECT DISTINCT
+		    je.suppliers_code AS suppliersCode
+		   ,MAX(concat(substr(je.accrual_date, 1, 4), '/', substr(je.accrual_date, 5, 2), '/', substr(je.accrual_date, 7, 2))) AS accrualDate
+		FROM
+			JOURNAL_ENTRY je
+		WHERE
+		    je.company_code = #{companyCode}
+		    AND je.suppliers_code IS NOT NULL
+			AND (
+				(je.debit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+					AND je.credit_account != #{accountCodeCarryforward}
+					AND je.credit_account != #{accountCodeNextCarryforward}
+				)
+				OR je.credit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+			)
+			AND je.amount_money > 0
+		GROUP BY
+			je.suppliers_code
+	</select>
+	<select id="selectAccountsReceivableSummary" resultMap="accountsSummaryData">
+		SELECT
+		    t.company_code AS companyCode
+		    ,t.suppliers_code AS torihikisakiCode
+		    ,tm.torihikisaki_name AS torihikisakiName
+		    ,je.accrual_date AS accrualDate
+		    ,je.depPay
+		    ,je.request
+		FROM
+		(
+			SELECT DISTINCT
+		    	 je.company_code
+		    	,je.suppliers_code
+			FROM
+				JOURNAL_ENTRY je
+			WHERE
+		    	je.company_code = #{companyCode}
+		    	AND je.suppliers_code IS NOT NULL
+				AND concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth}
+				AND (je.debit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+					OR je.credit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+				)
+				AND je.amount_money > 0
+			) t
+			LEFT JOIN (
+			SELECT
+		    	 a.company_code
+		    	,a.suppliers_code
+		    	,a.accrual_date
+		    	,SUM(a.depPay) AS depPay
+		    	,SUM(a.request) AS request
+			FROM
+			(
+				SELECT
+		    		 je.company_code
+		    		,je.suppliers_code
+		    		,concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) AS accrual_date
+		    		,je.amount_money AS depPay
+		    		,0 AS request
+				FROM
+					JOURNAL_ENTRY je
+				WHERE
+		    		je.company_code = #{companyCode}
+					AND je.suppliers_code IS NOT NULL
+					AND concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth} 
+					AND je.credit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+					AND je.amount_money > 0
+				UNION ALL
+				SELECT
+		    	 	 je.company_code
+		    		,je.suppliers_code
+		    		,concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) AS accrual_date
+		    		,0 AS depPay
+		    		,je.amount_money AS request
+				FROM
+					JOURNAL_ENTRY je
+				WHERE
+		    		je.company_code = #{companyCode}
+		    		AND je.suppliers_code IS NOT NULL
+					AND concat(substr(je.accrual_date, 1, 4), substr(je.accrual_date, 5, 2)) BETWEEN #{kiStartYearMonth} AND #{kiEndYearMonth}
+					AND je.debit_account IN (SELECT account_code FROM ACCOUNT_M WHERE company_code = #{companyCode} AND account_kind1 = '1' AND account_kind2 = '01' AND account_kind3 = '003' AND account_kind4 = '0002')
+					AND je.credit_account != #{accountCodeCarryforward}
+					AND je.credit_account != #{accountCodeNextCarryforward}
+				AND je.amount_money > 0
+			) a
+			GROUP BY
+		  		a.company_code, a.suppliers_code, a.accrual_date
+		) je ON
+			t.company_code = je.company_code
+			AND t.suppliers_code = je.suppliers_code
+		LEFT JOIN TORIHIKISAKI_M tm ON
+			t.company_code = tm.company_code
+			AND t.suppliers_code = tm.torihikisaki_code
+		ORDER BY
+			t.suppliers_code, je.accrual_date
+	</select>
+</mapper>

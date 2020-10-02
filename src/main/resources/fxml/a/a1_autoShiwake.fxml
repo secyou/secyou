@@ -1,0 +1,640 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane fx:id="a1_main" hgap="0.0" styleClass="tab-page" vgap="0.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.busicomjp.sapp.controller.a.A1Controller">
+  <padding>
+    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+  </padding>
+  <children>
+    <GridPane hgap="10.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.vgrow="NEVER">
+      <children>
+ 		<Button onMouseClicked="#onInputData" styleClass="btn, btn-sm, btn-success" text="登録(Enter)" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+ 		<Button onMouseClicked="#onDeleteData" styleClass="btn, btn-sm, btn-success" text="削除(Del)" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <GridPane GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+      <children>
+	      
+	    <GridPane GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0">
+	      <children>
+	        <TextFlow minWidth="65.0" prefWidth="70.0" styleClass="textflow-balance, bg-color-green, textflow-lt, boder-radius-l" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-small" text="&#10;" />
+	            <Text styleClass="text-white" text="リアル&#10;残高" />
+	          </children>
+	        </TextFlow>
+	        
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="本日残高" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="現金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="預貯金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="受取手形" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="売掛金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="支払手形" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="買掛金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="80.0" prefWidth="85.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="未払金" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="90.0" prefWidth="95.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top, boder-radius-rt" textAlignment="CENTER" GridPane.columnIndex="9" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-white" text="未払消費税" />
+	          </children>
+	        </TextFlow>
+	        
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl1" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl2" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl3" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl4" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl5" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="6" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl6" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="7" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl7" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom" textAlignment="CENTER" GridPane.columnIndex="8" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl8" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow styleClass="textflow-balance, textflow-bottom, boder-radius-rb" textAlignment="CENTER" GridPane.columnIndex="9" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl9" onMouseClicked="#onGotoBalance" styleClass="text-link" text="0" />
+	          </children>
+	        </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+                  <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+	        <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+	    
+	    <TextFlow fx:id="balance_center" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0">
+	       <children>
+	         <Text text="" />
+	       </children>
+	    </TextFlow>
+	    
+	    <GridPane GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="0">
+	      <children>
+	        
+	        <TextFlow minWidth="75.0" prefWidth="80.0" styleClass="textflow-balance, bg-color-green, textflow-lt, boder-radius-l" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-small" text="&#10;" />
+	            <Text styleClass="text-white" text="預貯金&#10;予定残高" />
+	          </children>
+	        </TextFlow>
+	        
+	 		<TextFlow styleClass="textflow-balance, bg-color-thin-green, textflow-top" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.rowSpan="2" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text styleClass="text-small" text="&#10;&#10;" />
+	            <DatePicker fx:id="expectDate" onAction="#onExpectDateSelect" prefWidth="120.0" promptText="yyyy/MM/dd" />
+	          </children>
+	        </TextFlow>
+	        <TextFlow minWidth="90.0" prefWidth="95.0" styleClass="textflow-balance, bg-color-thin-green, textflow-top, boder-radius-rt" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_title11" styleClass="text-white" text="-" />
+	          </children>
+	        </TextFlow>
+	        
+	        <TextFlow styleClass="textflow-balance, textflow-bottom, boder-radius-rb" textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+	          <children>
+	            <Text fx:id="text_bl11" text="0" />
+	          </children>
+	        </TextFlow>
+	      </children>
+	      <columnConstraints>
+	        <ColumnConstraints />
+	        <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+                  <ColumnConstraints />
+	      </columnConstraints>
+	      <rowConstraints>
+	        <RowConstraints />
+                  <RowConstraints />
+	      </rowConstraints>
+	      <opaqueInsets>
+	        <Insets />
+	      </opaqueInsets>
+	      <padding>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </padding>
+	      <GridPane.margin>
+	        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+	      </GridPane.margin>
+	    </GridPane>
+    
+    </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <GridPane styleClass="gridPane-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+      <children>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName1" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode1" styleClass="text-hidden" text="" visible="false" />
+            <Text fx:id="hintKbn" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName2" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode2" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName3" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode3" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName4" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode4" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName5" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode5" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName6" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode6" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName7" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode7" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1">
+          <children>
+            <Text fx:id="hintName8" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode8" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName9" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode9" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName10" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode10" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName11" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode11" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName12" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode12" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName13" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode13" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName14" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode14" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2">
+          <children>
+            <Text fx:id="hintName15" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode15" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName16" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode16" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName17" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode17" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName18" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode18" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName19" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode19" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName20" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode20" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+        <TextFlow styleClass="textflow-hint" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="hintName21" onMouseClicked="#onHintClick" styleClass="text-hint" text="" />
+            <Text fx:id="hintCode21" styleClass="text-hidden" text="" visible="false" />
+          </children>
+               <GridPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </GridPane.margin>
+        </TextFlow>
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="2.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+    
+    <TableView fx:id="acceptDataTable" editable="true" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3">
+	  <columns>
+	    <TableColumn fx:id="accrualDate" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="発生日" />
+	    <TableColumn fx:id="suppliersName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="取引先" />
+	    <TableColumn fx:id="tekiyoName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="摘要" />
+	    <TableColumn fx:id="debitName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="借方勘定科目" />
+	    <TableColumn fx:id="creditName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="貸方勘定科目" />
+	    <TableColumn fx:id="amountMoney" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" text="金額(税込)" />
+	    <TableColumn fx:id="tax" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" style="-fx-alignment: center-right;" text="税金" />
+	    <TableColumn fx:id="taxName" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="消費税" />
+	    <TableColumn fx:id="depPayDate" maxWidth="-1.0" minWidth="50.0" prefWidth="-1.0" sortable="false" text="入金・支払予定日" />
+	    <TableColumn fx:id="acceptNo" maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="受入No" visible="false" />
+	  </columns>
+		<columnResizePolicy>
+	        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+	    </columnResizePolicy>
+    </TableView>
+    
+    <Label text="" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+    
+    <GridPane GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5">
+      <children>
+      	<TextFlow textAlignment="CENTER" GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="分類" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="発生日" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="取引先" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="摘要" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="借方勘定科目" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="貸方勘定科目" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="金額(税込)" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text styleClass="strong" text="消費税" />
+          </children>
+        </TextFlow>
+        <TextFlow textAlignment="CENTER" GridPane.columnIndex="8" GridPane.hgrow="ALWAYS" GridPane.rowIndex="0" GridPane.vgrow="ALWAYS">
+          <children>
+            <Text fx:id="paymentDateText" styleClass="strong" text="入金・支払予定日" />
+          </children>
+        </TextFlow>
+        
+        <TextFlow GridPane.columnIndex="0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <ComboBox fx:id="inputSelectCombo" onAction="#onSelectAction" onHidden="#onSelectHidden" prefWidth="100.0" />
+          </children>
+        </TextFlow>
+        <TextFlow GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField fx:id="inputAccrualDate" onAction="#onAccrualDateEnter" promptText="MMDD" />
+          </children>
+        </TextFlow>
+        <TextFlow GridPane.columnIndex="2" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField fx:id="searchSuppliersName" onAction="#onSuppliersNameEnter" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchSuppliersCode" text="" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+        
+        <TextFlow GridPane.columnIndex="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField fx:id="searchTekiyoName" onAction="#onTekiyoNameEnter" />
+          </children>
+        </TextFlow>
+        <Text fx:id="searchTekiyoCode" text="" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+        
+        <TextFlow GridPane.columnIndex="4" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <ComboBox fx:id="inputDebitCombo" onHidden="#onDebitHidden" />
+          </children>
+        </TextFlow>
+        <TextFlow GridPane.columnIndex="5" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <ComboBox fx:id="inputCreditCombo" onHidden="#onCreditHidden" />
+          </children>
+        </TextFlow>
+        <Text fx:id="accountSettingKbn" text="" visible="false" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+        
+        <TextFlow GridPane.columnIndex="6" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField fx:id="inputKingaku" onAction="#onKingakuEnter" />
+          </children>
+        </TextFlow>
+        <TextFlow GridPane.columnIndex="7" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <ComboBox fx:id="inputTaxKbnCombo" onHidden="#onTaxKbnHidden" />
+          </children>
+        </TextFlow>
+        <TextFlow GridPane.columnIndex="8" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+          <children>
+            <TextField fx:id="inputPaymentDate" onAction="#onPaymentDateEnter" promptText="YYYYMMDD" />
+          </children>
+        </TextFlow>
+        
+      </children>
+      <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+        <ColumnConstraints />
+            <ColumnConstraints />
+      </columnConstraints>
+      <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+            <RowConstraints />
+      </rowConstraints>
+      <opaqueInsets>
+        <Insets />
+      </opaqueInsets>
+      <padding>
+        <Insets bottom="0.0" left="0.0" right="0.0" top="0.0" />
+      </padding>
+      <GridPane.margin>
+        <Insets bottom="5.0" left="0.0" right="0.0" top="0.0" />
+      </GridPane.margin>
+    </GridPane>
+
+    
+    
+  </children>
+  <columnConstraints>
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+    <ColumnConstraints />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+    <RowConstraints />
+  </rowConstraints>
+</GridPane>

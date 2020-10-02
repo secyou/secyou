@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.a.A0InputDataRepository">
+    <resultMap id="BalanceDtoResult" type="com.busicomjp.sapp.dto.a.BalanceDto">
+    </resultMap>
+	
+	<select id="getNextJournalNo" resultType="String" parameterType="String">
+		select LPAD(IFNULL(MAX(journal_no),0)+1, 9, "0") nextNo from JOURNAL_ENTRY where company_code = #{companyCode} 
+	</select>
+	
+	<select id="getNextGeneralNo" resultType="String" parameterType="String">
+		select LPAD(IFNULL(MAX(general_no),0)+1, 9, "0") nextNo from GENERAL_LEDGER where company_code = #{companyCode} 
+	</select>
+	
+	<select id="getTaxRate" resultType="int" parameterType="String">
+		select tax_value from TAX_M where tax_code = #{taxCode} 
+	</select>
+	
+	<select id="getBalance" resultMap="BalanceDtoResult" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		select 
+		    IFNULL(balance_money,0) balanceMoney
+		    , general_no generalNo
+		from GENERAL_LEDGER 
+		where company_code = #{companyCode} 
+		and account_code = #{accountCode}
+		and accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		<![CDATA[
+		and ( ( accrual_date = #{accrualDate} and general_no < #{generalNo} )
+		     or accrual_date < #{accrualDate}
+		)
+		]]>
+		order by accrual_date DESC, generalNo DESC
+		limit 1
+	</select>
+	
+	<update id="updateBalance" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		update GENERAL_LEDGER 
+		set
+		   balance_money = balance_money + #{balanceMoney}
+		   ,upd_date = current_timestamp
+		where company_code = #{companyCode}
+		and account_code = #{accountCode}
+		and accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+		<![CDATA[
+		and ( ( accrual_date = #{accrualDate} and general_no > #{generalNo} )
+		     or accrual_date > #{accrualDate}
+		)
+		]]>
+	</update>
+	
+	<insert id="insertJournalEntryData" parameterType="com.busicomjp.sapp.dto.a.JournalEntryInsertDto">
+		insert into JOURNAL_ENTRY
+			(company_code
+			,journal_no
+			,org_journal_no
+			,kind_code
+			,accrual_date
+			,suppliers_code
+			,tekiyo_code
+			,debit_account
+			,credit_account
+			,amount_money
+			,amount_money_tax
+			,tax_code
+			,dep_pay_date
+			,red_flg
+			,reg_date
+			,upd_date)
+		values (
+			#{companyCode},
+			#{journalNo},
+			#{orgJournalNo},
+			#{kindCode},
+			#{accrualDate},
+			#{suppliersCode},
+			#{tekiyoCode},
+			#{debitAccount},
+			#{creditAccount},
+			#{amountMoney},
+			#{amountMoneyTax},
+			#{taxCode},
+			#{depPayDate},
+			#{redFlg},
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<insert id="insertGeneralLedgerData" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		insert into GENERAL_LEDGER
+			(company_code
+			,general_no
+			,journal_no
+			,accrual_date
+			,account_code
+			,counter_account
+			,tekiyo_code
+			,debit_amount_money
+			,credit_amount_money
+			,balance_money
+			,dep_pay_date
+			,reg_date
+			,upd_date)
+		values (
+			#{companyCode},
+			#{generalNo},
+			#{journalNo},
+			#{accrualDate},
+			#{accountCode},
+			#{counterAccount},
+			#{tekiyoCode},
+			#{debitAmountMoney},
+			#{creditAmountMoney},
+			#{balanceMoney},
+			#{depPayDate},
+			current_timestamp,
+			current_timestamp)
+	</insert>
+	
+	<select id="getTaxGeneralLedgerData" resultType="com.busicomjp.sapp.dto.a.GeneralLedgerDto" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		select 
+		    company_code companyCode
+		    ,general_no generalNo
+			,journal_no journalNo
+			,accrual_date accrualDate
+			,account_code accountCode
+			,counter_account counterAccount
+			,tekiyo_code tekiyoCode
+			,debit_amount_money debitAmountMoney
+			,credit_amount_money creditAmountMoney
+			,balance_money balanceMoney
+			,dep_pay_date depPayDate
+		from GENERAL_LEDGER 
+		where company_code = #{companyCode}
+		and accrual_date = #{accrualDate} 
+		and account_code = #{accountCode}
+		and counter_account = #{counterAccount}
+		order by generalNo DESC
+		limit 1
+	</select>
+
+	<update id="updateTaxGeneralLedgerData" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		update GENERAL_LEDGER 
+		set
+		   journal_no = ''
+		   ,tekiyo_code = null
+		   ,dep_pay_date = null
+		   ,debit_amount_money = debit_amount_money + #{debitAmountMoney}
+		   ,credit_amount_money = credit_amount_money + #{creditAmountMoney}
+		   ,balance_money = balance_money + #{debitAmountMoney} - #{creditAmountMoney}
+		   ,upd_date = current_timestamp
+		where company_code = #{companyCode}
+		and general_no = #{generalNo}
+		and accrual_date = #{accrualDate} 
+		and account_code = #{accountCode}
+		and counter_account = #{counterAccount}
+	</update>
+	
+	<select id="getAccountDetail" resultType="com.busicomjp.sapp.model.z.AccountData" parameterType="String">
+		select
+		  account_kind1 accountKind1,
+		  account_kind2 accountKind2,
+		  account_kind3 accountKind3,
+		  account_kind4 accountKind4,
+		  concat(account_kind1, ',', account_kind2, ',', account_kind3, ',', account_kind4) accountKindUnion,
+		  kind_flg kindFlg
+		from ACCOUNT_M 
+		where company_code = #{companyCode} 
+		AND account_code = #{accountCode}
+	</select>
+	
+	<select id="getCarryForwardData" resultType="com.busicomjp.sapp.dto.a.GeneralLedgerDto" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		select
+		    company_code companyCode
+		    ,general_no generalNo
+			,journal_no journalNo
+			,accrual_date accrualDate
+			,account_code accountCode
+			,counter_account counterAccount
+			,tekiyo_code tekiyoCode
+			,debit_amount_money debitAmountMoney
+			,credit_amount_money creditAmountMoney
+			,balance_money balanceMoney
+			,dep_pay_date depPayDate
+		from GENERAL_LEDGER 
+		where company_code = #{companyCode} 
+		AND account_code = #{accountCode}
+		AND counter_account = #{counterAccount}
+		and accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+	</select>
+	
+	<update id="updateCarryForwardGeneralLedgerData" parameterType="com.busicomjp.sapp.dto.a.GeneralLedgerDto">
+		update GENERAL_LEDGER 
+		set
+		   debit_amount_money = debit_amount_money + #{debitAmountMoney}
+		   ,credit_amount_money = credit_amount_money + #{creditAmountMoney}
+		   ,balance_money = balance_money + #{debitAmountMoney} - #{creditAmountMoney}
+		   ,upd_date = current_timestamp
+		where company_code = #{companyCode} 
+		AND account_code = #{accountCode}
+		AND counter_account = #{counterAccount}
+		and accrual_date BETWEEN #{accountStartDay} AND #{accountEndDay}
+	</update>
+	
+</mapper>

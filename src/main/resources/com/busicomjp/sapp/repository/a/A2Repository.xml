@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.busicomjp.sapp.repository.a.A2Repository">
+	<resultMap id="journalDataResult" type="com.busicomjp.sapp.model.a.JournalEntryData">
+    </resultMap>
+
+	<select id="selectJournalList" resultMap="journalDataResult">
+		SELECT
+		     je.company_code AS companyCode
+			,je.journal_no AS journalNo
+			,je.org_journal_no AS orgJournalNo
+			,je.kind_code AS kindCode
+			,concat(substr(je.accrual_date, 1, 4), '/', substr(je.accrual_date, 5, 2), '/', substr(je.accrual_date, 7, 2)) AS accrualDate
+			,je.debit_account AS debitAccount
+			,am_d.account_name AS debitName
+			,je.credit_account AS creditAccount
+			,am_c.account_name AS creditName
+			,FORMAT(je.amount_money, 0) AS amountMoney
+			,concat(substr(je.dep_pay_date, 1, 4), '/', substr(je.dep_pay_date, 5, 2), '/', substr(je.dep_pay_date, 7, 2)) AS depPayDate
+			,je.suppliers_code AS suppliersCode
+			,tm.torihikisaki_name AS suppliersName
+			,je.tekiyo_code AS tekiyoCode
+			,sm.tekiyo_name AS tekiyoName
+			,FORMAT(je.amount_money_tax, 0) AS tax
+			,je.tax_code AS taxCode
+			,taxm.tax_name AS taxRate
+			,je.red_flg AS redFlg
+		FROM
+			 JOURNAL_ENTRY je
+			 LEFT JOIN TORIHIKISAKI_M tm ON
+			 	 tm.company_code = je.company_code
+			 AND tm.torihikisaki_code = je.suppliers_code
+			 LEFT JOIN (
+				SELECT DISTINCT
+					company_code, tekiyo_code, tekiyo_name, tekiyo_name_kana
+				FROM
+					SUMMARY_M
+				WHERE
+					company_code = #{companyCode}
+			 ) sm ON
+			 	 sm.company_code = je.company_code
+			 AND sm.tekiyo_code = je.tekiyo_code
+			 INNER JOIN ACCOUNT_M am_d ON
+			 	 am_d.company_code = je.company_code
+			 AND am_d.account_code = je.debit_account
+			 AND am_d.agg_flg = '1'
+			 INNER JOIN ACCOUNT_M am_c ON
+			 	 am_c.company_code = je.company_code
+			 AND am_c.account_code = je.credit_account
+			 AND am_c.agg_flg = '1'
+			 INNER JOIN TAX_M taxm ON
+			 	taxm.tax_code = je.tax_code
+		WHERE
+			je.company_code = #{companyCode}
+			<if test="journalNo != null">
+				AND je.journal_no = #{journalNo}
+		  	</if>
+			<if test="accrualStartDate != null or accrualEndDate != null">
+			<choose>
+		    	<when test="accrualStartDate != null and accrualEndDate != null">
+		      		AND je.accrual_date BETWEEN #{accrualStartDate} AND #{accrualEndDate}
+		    	</when>
+		    	<when test="accrualStartDate != null">
+		      		AND je.accrual_date &gt;= #{accrualStartDate}
+		    	</when>
+		    	<otherwise>
+		    		AND je.accrual_date &lt;= #{accrualEndDate}
+		    	</otherwise>
+		  	</choose>
+		  	</if>
+		  	<choose>
+		    	<when test="suppliersCode != null">
+		      		AND je.suppliers_code = #{suppliersCode}
+		    	</when>
+		    	<when test="suppliersCode == null and suppliersName != null">
+		      		AND tm.torihikisaki_name LIKE concat('%', #{suppliersName}, '%')
+		    	</when>
+		  	</choose>
+		  	<choose>
+		    	<when test="tekiyoCode != null">
+		      		AND je.tekiyo_code = #{tekiyoCode}
+		    	</when>
+		    	<when test="tekiyoCode == null and tekiyoName != null">
+		      		AND (sm.tekiyo_name LIKE CONCAT('%', #{tekiyoName}, '%') OR sm.tekiyo_name_kana LIKE concat('%', #{tekiyoName}, '%'))
+		    	</when>
+		  	</choose>
+		  	<choose>
+		    	<when test="debitAccount != null">
+		      		AND je.debit_account = #{debitAccount}
+		    	</when>
+		    	<when test="debitAccount == null and debitAccountName != null">
+		      		AND (am_d.account_name LIKE CONCAT('%', #{debitAccountName}, '%') OR am_d.account_name_kana LIKE CONCAT('%', #{debitAccountName}, '%'))
+		    	</when>
+		  	</choose>
+		  	<choose>
+		    	<when test="creditAccount != null">
+		      		AND je.credit_account = #{creditAccount}
+		    	</when>
+		    	<when test="creditAccount == null and creditAccountName != null">
+		      		AND (am_c.account_name LIKE CONCAT('%', #{creditAccountName}, '%') OR am_c.account_name_kana LIKE CONCAT('%', #{creditAccountName}, '%'))
+		    	</when>
+		  	</choose>
+		  	<if test="amountMoneyStart != null or amountMoneyEnd != null">
+			<choose>
+		    	<when test="amountMoneyStart != null and amountMoneyEnd != null">
+		      		AND je.amount_money BETWEEN #{amountMoneyStart} AND #{amountMoneyEnd}
+		    	</when>
+		    	<when test="amountMoneyStart != null">
+		      		AND je.amount_money &gt;= #{amountMoneyStart}
+		    	</when>
+		    	<otherwise>
+		    		AND je.amount_money &lt;= #{amountMoneyEnd}
+		    	</otherwise>
+		  	</choose>
+		  	</if>
+		  	<if test="depPayStartDate != null or depPayEndDate != null">
+			<choose>
+		    	<when test="depPayStartDate != null and depPayEndDate != null">
+		      		AND je.dep_pay_date BETWEEN #{depPayStartDate} AND #{depPayEndDate}
+		    	</when>
+		    	<when test="depPayStartDate != null">
+		      		AND je.dep_pay_date &gt;= #{depPayStartDate}
+		    	</when>
+		    	<otherwise>
+		    		AND je.dep_pay_date &lt;= #{depPayEndDate}
+		    	</otherwise>
+		  	</choose>
+		  	</if>
+		ORDER BY
+			je.accrual_date ASC, je.journal_no ASC
+	</select>
+</mapper>
