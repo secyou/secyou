@@ -75,7 +75,7 @@
 	</select>
 	<insert id="insertCompanyData" parameterType="com.busicomjp.sapp.dto.d.CompanyMDto">
 		insert into COMPANY_M
-			(company_code,
+			(company_code,nnnnn
 			business_type,
 			company_name,
 			company_name_kana,
